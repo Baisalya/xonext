@@ -2,7 +2,9 @@
 import 'package:get/get.dart';
 
 import '../Pages/Home/HomeScreen.dart';
+import '../Pages/chat screen/ChatScreen.dart';
 import '../Pages/intro/OnboardingScreen.dart';
+import '../Pages/users/ForgotPasswordScreen.dart';
 import '../Pages/users/SignUpScreen.dart';
 import '../Pages/intro/SplashScreen.dart';
 import '../Pages/users/LoginScreen.dart';
@@ -28,6 +30,12 @@ class AppRoutes {
       page: () => LoginScreen(),
       transition: Transition.fadeIn,
     ),
+    //forgotpassword
+    GetPage(
+        name: '/forgotpass',
+        page: () =>ForotPasswordScreen(),
+        transition: Transition.upToDown
+    ),
     //Signup
     GetPage(
         name: '/signup',
@@ -37,6 +45,8 @@ class AppRoutes {
     //Tabs
     GetPage(name: '/home',
         page: ()=>HomeScreen()),
+    GetPage(name: '/chat',
+        page: ()=>ChatScreen()),
 
    /* GetPage(name: '/setting',
         page:()=> SettingsTab()),
