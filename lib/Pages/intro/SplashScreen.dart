@@ -61,7 +61,7 @@ class _SplashScreenState extends State<SplashScreen>
             SizedBox(height: 1),
             Expanded(
               flex: 1,
-              child: Row(
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   // "Powered by" text

@@ -206,7 +206,7 @@ class _LoginScreenState extends State<LoginScreen> {
         children: <Widget>[
           // Background image
           Image.network(
-            'https://www.imageshine.in/uploads/gallery/Road-with-Sky-wallpaper-for-editing.jpg', // Replace with your image URL
+            'https://img.freepik.com/free-photo/painting-mountain-lake-with-mountain-background_188544-9126.jpg', // Replace with your image URL
             fit: BoxFit.cover,
             height: double.infinity,
             width: double.infinity,
@@ -280,7 +280,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       alignment: Alignment.centerRight,
                       child: TextButton(
                         onPressed: () {
-                          Get.toNamed('/signup');
+                          Get.toNamed('/forgotpass');
                         },
                         child: Text(
                           'Forgot Password?',
@@ -314,7 +314,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         SizedBox(width: 40),*/
                         _buildSocialButton(
                           onTap: () {
-                            // Handle Google sign in
+                            Get.toNamed('/chat');
                           },
                           imageAsset: 'assets/google.png',
                         ),
@@ -324,7 +324,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     GestureDetector(
                       onTap: () {
                         // Handle sign up
-                        Get.offNamed('/home');
+                        Get.toNamed('/signup');
                       },
                       child: RichText(
                         text: const TextSpan(
