@@ -9,10 +9,6 @@ import '../Pages/users/SignUpScreen.dart';
 import '../Pages/intro/SplashScreen.dart';
 import '../Pages/users/LoginScreen.dart';
 
-
-
-
-
 class AppRoutes {
   static final List<GetPage> routes = [
     GetPage(
@@ -39,7 +35,7 @@ class AppRoutes {
     //Signup
     GetPage(
         name: '/signup',
-        page: () =>SignUpScreen(),
+        page: () =>SignupScreen(),
         transition: Transition.upToDown
     ),
     //Tabs
