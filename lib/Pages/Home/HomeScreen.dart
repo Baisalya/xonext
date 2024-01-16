@@ -15,7 +15,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(),
-      drawer: CustomDrawer(),
+      //drawer: CustomDrawer(),
       body: Center(
         child: Text('Home Page'),
       ),

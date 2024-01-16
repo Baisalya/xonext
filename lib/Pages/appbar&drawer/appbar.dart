@@ -46,51 +46,91 @@ class CustomDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: Column(
-        children: [
-          UserAccountsDrawerHeader(
-            accountName: Text('Your Name'),
-            accountEmail: Text('your.email@example.com'),
-            currentAccountPicture: CircleAvatar(
+      child: SafeArea(
+        child: Column(
+          children: [
+/*
+            UserAccountsDrawerHeader(
+              accountName: Text('Your Name'),
+              accountEmail: Text('your.email@example.com'),
+              currentAccountPicture: CircleAvatar(
+                backgroundImage: AssetImage('assets/Applogo/applogo.png'),
+              ),
+            ),
+*/
+        Container(
+        padding: EdgeInsets.all(16.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            CircleAvatar(
               backgroundImage: AssetImage('assets/Applogo/applogo.png'),
+              radius: 25.0,
             ),
-          ),
-          DefaultTabController(
-            length: 2,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  child: RotatedBox(
-                    quarterTurns: -1,
-                    child: TabBar(
-                      controller: tabController,
-                      isScrollable: true,
-                      labelColor: Colors.blue,
-                      tabs: [
-                        Tab(text: 'Tab 1'),
-                        Tab(text: 'Tab 2'),
-                      ],
+            IconButton(
+              icon: Icon(Icons.arrow_back_ios),
+              onPressed: () {
+                // Handle back button press
+              },
+            ),
+          ],
+        ),
+    ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(10.0,0,10,0),
+              child: Divider(
+                color: Colors.black12,
+                thickness: 2,
+              ),
+            ),
+            DefaultTabController(
+              length: 2,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    child: RotatedBox(
+                      quarterTurns: -1,
+                      child: TabBar(
+                        controller: tabController,
+                        isScrollable: true,
+                        labelColor: Colors.blue,
+                        tabs: [
+                          RotatedBox(
+                            quarterTurns:1,
+                            child: Tab(
+                              icon: Image.asset('assets/setting.png', width: 35.0, height: 35.0),
+                            ),
+                          ),
+                          RotatedBox(
+                            quarterTurns:1,
+                            child: Tab(
+                              icon: Image.asset('assets/Applogo/applogo.png', width: 45.0, height: 45.0),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                Expanded(
-                  child: Container(
-                    height: MediaQuery.of(context).size.width, // Adjust the height as needed
-                    child: TabBarView(
-                      controller: tabController,
-                      physics: NeverScrollableScrollPhysics(),
-                      children: [
-                        Usersetting(),
-                        Center(child: Text('Tab 2 Content')),
-                      ],
+                  Expanded(
+                    child: Container(
+                      height: MediaQuery.of(context).size.width, // Adjust the height as needed
+                      child: TabBarView(
+                        controller: tabController,
+                        physics: NeverScrollableScrollPhysics(),
+                        children: [
+                          Center(child: Text('Tab 2 Content')),
+                          Usersetting(),
+
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -12,10 +12,9 @@ class ChatScreen extends StatefulWidget {
   State createState() => ChatScreenState();
 }
 
-class ChatScreenState extends State<ChatScreen> {
-  final TextEditingController _textController = TextEditingController();
+class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {  final TextEditingController _textController = TextEditingController();
   final List<ChatMessage> _messages = <ChatMessage>[];
-
+  late TabController _tabController;
   void _handleSubmitted(String text) {
     _textController.clear();
     ChatMessage message = ChatMessage(
@@ -25,12 +24,16 @@ class ChatScreenState extends State<ChatScreen> {
       _messages.insert(0, message);
     });
   }
-
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 2, vsync:this); // Adjust the length as needed
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(),
-      drawer: CustomDrawer(),
+      drawer: CustomDrawer(tabController: _tabController,),
       body: Stack(
         children: [
           // Background Image with Acrylic Blur

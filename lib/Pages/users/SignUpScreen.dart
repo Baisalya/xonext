@@ -166,6 +166,7 @@ class _SignupScreenState extends State<SignupScreen> {
           height: 60.0,
           child: TextField(
             controller: controller,
+
             style: TextStyle(
               color: Colors.black87,
               fontSize: 16.0,
@@ -178,6 +179,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 color: Colors.black87,
               ),
               hintText: 'Enter your Name',
+
               hintStyle: TextStyle(
                 color: Colors.black38,
                 fontFamily: 'OpenSans',

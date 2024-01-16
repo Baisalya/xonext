@@ -57,9 +57,10 @@ class Usersetting extends StatelessWidget {
                     onChanged: (double value) {
                       // Handle font size adjustment based on the slider value
                     },
-                    label: 'Adjust Font Size',
+                    label: _getLabel(1.0), // Initial label
                     activeColor: Theme.of(context).focusColor,
                   ),
+
                 ),
                 Text(
                   'A',
@@ -69,13 +70,13 @@ class Usersetting extends StatelessWidget {
             ),
             SizedBox(height: 18.0),
             Text("The text font size will adjust"),
-            SizedBox(height: 18.0),
+            SizedBox(height: 30.0),
             ElevatedButton(
               onPressed: () {
                 // Handle logout
               },
               style: ElevatedButton.styleFrom(
-                primary:  Colors.orange, // Set the primary color to orange
+                primary:  Colors.red, // Set the primary color to orange
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8.0),
                 ),
@@ -95,4 +96,15 @@ class Usersetting extends StatelessWidget {
       ),
     );
   }
+  String _getLabel(double value) {
+    Map<double, String> labels = {
+      1.0: 'Small',
+      2.0: 'Medium',
+      3.0: 'Large',
+      4.0: 'XL',
+    };
+
+    return labels[value] ?? ''; // Return the label for the given value, or an empty string if not found
+  }
+
 }
