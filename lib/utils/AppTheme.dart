@@ -62,5 +62,15 @@ class AppTheme {
   static Color sliderInactiveColor(BuildContext context) =>
       Theme.of(context).brightness == Brightness.dark
           ? Colors.white70 // Border color in dark mode
-          : Colors.black38; // Border color in light mode
+          : Colors.black38;
+
+  static dividercolor(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.dark
+          ? Colors.white60 // Border color in dark mode
+          : Colors.black38;
+
+  static Tabselector(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.dark
+          ? Colors.white60 // Border color in dark mode
+          : Colors.red;
 }

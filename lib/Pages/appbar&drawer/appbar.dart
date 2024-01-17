@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:xonext/utils/AppTheme.dart';
 
+import 'drawertab/settings.dart';
 import 'drawertab/usersetting.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -71,7 +73,7 @@ class CustomDrawer extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.fromLTRB(10.0,0,10,0),
               child: Divider(
-                color: Colors.black12,
+                color: AppTheme.dividercolor(context),
                 thickness: 2,
               ),
             ),
@@ -105,6 +107,11 @@ class CustomDrawer extends StatelessWidget {
                                   ),
                                 ),
                               ],
+                              indicatorSize: TabBarIndicatorSize.label, // You can use TabBarIndicatorSize.tab for different style
+                              indicator: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10), // You can customize the border radius
+                                color: AppTheme.Tabselector(context) // You can set your preferred color
+                              ),
                             ),
                           ),
                         ),
@@ -115,7 +122,7 @@ class CustomDrawer extends StatelessWidget {
                               controller: tabController,
                               physics: NeverScrollableScrollPhysics(),
                               children: [
-                                Center(child: Text('Tab 2 Content')),
+                                setting()  ,
                                 Usersetting(),
 
                               ],

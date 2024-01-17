@@ -130,7 +130,7 @@ class Usersetting extends StatelessWidget {
       1.0: 'Small',
       2.0: 'Medium',
       3.0: 'Large',
-      4.0: 'XL',
+      4.0: 'Extra large',
     };
 
     return labels[value] ?? ''; // Return the label for the given value, or an empty string if not found
