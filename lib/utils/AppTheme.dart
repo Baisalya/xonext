@@ -43,4 +43,24 @@ class AppTheme {
     color: warningErrorTextColor,
     fontSize: 16.0,
   );
+  //day and night
+  static Color cardBackgroundColor(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.dark
+          ? Colors.white60 // Set your dark mode background color here
+          : Colors.white; // Set your light mode background color here
+
+  static Color borderColor(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.dark
+          ? Colors.white // Border color in dark mode
+          : Colors.black; // Border color in light mode
+
+  static Color sliderActiveColor(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.dark
+          ? Colors.white // Border color in dark mode
+          : Colors.black; // Border color in light mode
+
+  static Color sliderInactiveColor(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.dark
+          ? Colors.white70 // Border color in dark mode
+          : Colors.black38; // Border color in light mode
 }

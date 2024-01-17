@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
+import '../../../utils/AppTheme.dart';
 import '../../../utils/Customized/CustomSlider.dart';
 import '../../../utils/Customized/CustomizedSwitch.dart';
 import '../../../utils/ThemeNotifier.dart';
@@ -9,21 +10,10 @@ import '../../../utils/ThemeNotifier.dart';
 class Usersetting extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Color cardBackgroundColor = Theme.of(context).brightness == Brightness.dark
-        ? Colors.white60 // Set your dark mode background color here
-        : Colors.white; // Set your light mode background color here
-    Color borderColor = Theme.of(context).brightness == Brightness.dark
-        ? Colors.white // Border color in dark mode
-        : Colors.black; // Border color in light mode
-    Color slideractive = Theme.of(context).brightness == Brightness.dark
-        ? Colors.white // Border color in dark mode
-        : Colors.black; // Border color in light mode
-    Color sliderinactive = Theme.of(context).brightness == Brightness.dark
-        ? Colors.white70 // Border color in dark mode
-        : Colors.black38; // Border color in light mode
+
     return Card(
       elevation: 9.0,
-      color: cardBackgroundColor,
+      color: AppTheme.cardBackgroundColor(context),
       shadowColor: Colors.grey.shade700, // Adjusted shadow color
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15.0),
@@ -35,7 +25,7 @@ class Usersetting extends StatelessWidget {
           children: [
             Text(
               'Theme',
-              style: Theme.of(context).textTheme.headline6,
+              style: Theme.of(context).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 18.0),
             CustomizedSwitch(
@@ -47,7 +37,7 @@ class Usersetting extends StatelessWidget {
               },
               activeColor: Theme.of(context).hoverColor,
               inactiveColor: Colors.white,
-              borderColor: borderColor,
+              borderColor: AppTheme.borderColor(context),
               borderWidth: 2.0,),
             SizedBox(height: 18.0),
             Text(
@@ -93,8 +83,8 @@ class Usersetting extends StatelessWidget {
                         // Handle font size adjustment based on the slider value
                       },
                       label: _getLabel(1.0), // Initial label
-                      activeColor: slideractive,
-                      inactiveColor: sliderinactive,
+                      activeColor: AppTheme.sliderActiveColor(context),
+                      inactiveColor: AppTheme.sliderInactiveColor(context),
                     ),
                   )
 
