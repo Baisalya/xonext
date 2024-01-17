@@ -49,15 +49,6 @@ class CustomDrawer extends StatelessWidget {
       child: SafeArea(
         child: Column(
           children: [
-/*
-            UserAccountsDrawerHeader(
-              accountName: Text('Your Name'),
-              accountEmail: Text('your.email@example.com'),
-              currentAccountPicture: CircleAvatar(
-                backgroundImage: AssetImage('assets/Applogo/applogo.png'),
-              ),
-            ),
-*/
         Container(
         padding: EdgeInsets.all(16.0),
         child: Row(
@@ -71,6 +62,7 @@ class CustomDrawer extends StatelessWidget {
               icon: Icon(Icons.arrow_back_ios),
               onPressed: () {
                 // Handle back button press
+                Navigator.of(context).pop();
               },
             ),
           ],
@@ -83,55 +75,85 @@ class CustomDrawer extends StatelessWidget {
                 thickness: 2,
               ),
             ),
-            DefaultTabController(
-              length: 2,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
+            SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Column(
                 children: [
-                  Container(
-                    child: RotatedBox(
-                      quarterTurns: -1,
-                      child: TabBar(
-                        controller: tabController,
-                        isScrollable: true,
-                        labelColor: Colors.blue,
-                        tabs: [
-                          RotatedBox(
-                            quarterTurns:1,
-                            child: Tab(
-                              icon: Image.asset('assets/setting.png', width: 35.0, height: 35.0),
+                  DefaultTabController(
+                    length: 2,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          child: RotatedBox(
+                            quarterTurns: -1,
+                            child: TabBar(
+                              controller: tabController,
+                              isScrollable: true,
+                              labelColor: Colors.blue,
+                              tabs: [
+                                RotatedBox(
+                                  quarterTurns:1,
+                                  child: Tab(
+                                    icon: Image.asset('assets/setting.png', width: 35.0, height: 35.0),
+                                  ),
+                                ),
+                                RotatedBox(
+                                  quarterTurns:1,
+                                  child: Tab(
+                                    icon: Image.asset('assets/Applogo/applogo.png', width: 45.0, height: 45.0),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                          RotatedBox(
-                            quarterTurns:1,
-                            child: Tab(
-                              icon: Image.asset('assets/Applogo/applogo.png', width: 45.0, height: 45.0),
+                        ),
+                        Expanded(
+                          child: Container(
+                            height: MediaQuery.of(context).size.width, // Adjust the height as needed
+                            child: TabBarView(
+                              controller: tabController,
+                              physics: NeverScrollableScrollPhysics(),
+                              children: [
+                                Center(child: Text('Tab 2 Content')),
+                                Usersetting(),
+
+                              ],
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
-                  Expanded(
-                    child: Container(
-                      height: MediaQuery.of(context).size.width, // Adjust the height as needed
-                      child: TabBarView(
-                        controller: tabController,
-                        physics: NeverScrollableScrollPhysics(),
-                        children: [
-                          Center(child: Text('Tab 2 Content')),
-                          Usersetting(),
-
-                        ],
+                  ElevatedButton(
+                    onPressed: () {
+                      Get.toNamed('/chat');
+                      // Handle logout
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary:  Colors.red, // Set the primary color to orange
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 12.0,
+                      ),
+                      child: Text(
+                        'Logout',
+                        style: TextStyle(fontSize: 16.0),
                       ),
                     ),
                   ),
                 ],
               ),
             ),
+
           ],
         ),
       ),
+      width: double.infinity, // Set the width to take up the full screen
     );
   }
 }

@@ -12,7 +12,8 @@ class ChatScreen extends StatefulWidget {
   State createState() => ChatScreenState();
 }
 
-class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {  final TextEditingController _textController = TextEditingController();
+class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
+  final TextEditingController _textController = TextEditingController();
   final List<ChatMessage> _messages = <ChatMessage>[];
   late TabController _tabController;
   void _handleSubmitted(String text) {

@@ -1,13 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
+import '../../../utils/Customized/CustomSlider.dart';
+import '../../../utils/Customized/CustomizedSwitch.dart';
 import '../../../utils/ThemeNotifier.dart';
 
 class Usersetting extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Color cardBackgroundColor = Theme.of(context).brightness == Brightness.dark
+        ? Colors.white60 // Set your dark mode background color here
+        : Colors.white; // Set your light mode background color here
+    Color borderColor = Theme.of(context).brightness == Brightness.dark
+        ? Colors.white // Border color in dark mode
+        : Colors.black; // Border color in light mode
+    Color slideractive = Theme.of(context).brightness == Brightness.dark
+        ? Colors.white // Border color in dark mode
+        : Colors.black; // Border color in light mode
+    Color sliderinactive = Theme.of(context).brightness == Brightness.dark
+        ? Colors.white70 // Border color in dark mode
+        : Colors.black38; // Border color in light mode
     return Card(
-      elevation: 10.0,
+      elevation: 9.0,
+      color: cardBackgroundColor,
       shadowColor: Colors.grey.shade700, // Adjusted shadow color
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15.0),
@@ -22,7 +38,7 @@ class Usersetting extends StatelessWidget {
               style: Theme.of(context).textTheme.headline6,
             ),
             SizedBox(height: 18.0),
-            Switch(
+            CustomizedSwitch(
               value: Theme.of(context).brightness == Brightness.dark,
               onChanged: (value) {
                 ThemeMode selectedMode = value ? ThemeMode.dark : ThemeMode.light;
@@ -30,9 +46,12 @@ class Usersetting extends StatelessWidget {
                     .setTheme(selectedMode);
               },
               activeColor: Theme.of(context).hoverColor,
-            ),
+              inactiveColor: Colors.white,
+              borderColor: borderColor,
+              borderWidth: 2.0,),
+            SizedBox(height: 18.0),
             Text(
-              Theme.of(context).brightness == Brightness.dark ? ' Click to switch to Dark Mode' : 'Click to switch to Day Mode',
+              Theme.of(context).brightness == Brightness.dark ? ' Click to switch to Day Mode' : 'Click to switch to Dark Mode',
               style: Theme.of(context).textTheme.subtitle1,
             ),
             SizedBox(height: 18.0),
@@ -49,17 +68,36 @@ class Usersetting extends StatelessWidget {
                   style: TextStyle(fontSize: 14.0), // Placeholder for font size
                 ),
                 Expanded(
-                  child: Slider(
-                    value: 1.0,
-                    min: 1.0,
-                    max: 4.0,
-                    divisions: 3,
-                    onChanged: (double value) {
-                      // Handle font size adjustment based on the slider value
-                    },
-                    label: _getLabel(1.0), // Initial label
-                    activeColor: Theme.of(context).focusColor,
-                  ),
+                  child: SliderTheme(
+                    data: SliderThemeData(
+                      trackHeight: 8.0, // Adjust the value to make the slider thicker
+
+                      // Customize the track colors
+                      activeTrackColor: Colors.blue, // Color of the active part of the slider
+                      inactiveTrackColor: Colors.grey, // Color of the inactive part of the slider
+
+                      // Customize the thumb shape and color
+                      thumbShape: CustomSliderThumbShape(),
+                      thumbColor: Colors.blue,
+
+                      // Customize the overlay appearance when dragging the slider
+                      overlayShape: RoundSliderOverlayShape(overlayRadius: 16.0),
+                      overlayColor: Colors.blue.withOpacity(0.3),
+                    ),
+                    child: Slider(
+                      value: 1.0,
+                      min: 1.0,
+                      max: 4.0,
+                      divisions: 3,
+                      onChanged: (double value) {
+                        // Handle font size adjustment based on the slider value
+                      },
+                      label: _getLabel(1.0), // Initial label
+                      activeColor: slideractive,
+                      inactiveColor: sliderinactive,
+                    ),
+                  )
+
 
                 ),
                 Text(
@@ -73,6 +111,7 @@ class Usersetting extends StatelessWidget {
             SizedBox(height: 30.0),
             ElevatedButton(
               onPressed: () {
+                Get.toNamed('/home');
                 // Handle logout
               },
               style: ElevatedButton.styleFrom(
