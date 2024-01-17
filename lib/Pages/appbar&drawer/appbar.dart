@@ -122,7 +122,7 @@ class CustomDrawer extends StatelessWidget {
                               controller: tabController,
                               physics: NeverScrollableScrollPhysics(),
                               children: [
-                                setting()  ,
+                                Setting()  ,
                                 Usersetting(),
 
                               ],

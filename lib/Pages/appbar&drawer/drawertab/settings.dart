@@ -7,14 +7,20 @@ import '../../../utils/Customized/CustomSlider.dart';
 import '../../../utils/Customized/CustomizedSwitch.dart';
 import '../../../utils/ThemeNotifier.dart';
 
-class setting extends StatelessWidget {
+class Setting extends StatefulWidget {
+  @override
+  _SettingState createState() => _SettingState();
+}
+
+class _SettingState extends State<Setting> {
+  bool _isExpanded = false;
+
   @override
   Widget build(BuildContext context) {
-
     return Card(
       elevation: 9.0,
       color: AppTheme.cardBackgroundColor(context),
-      shadowColor: Colors.grey.shade700, // Adjusted shadow color
+      shadowColor: Colors.grey.shade700,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15.0),
       ),
@@ -35,25 +41,23 @@ class setting extends StatelessWidget {
                   // Handle dropdown value change
                   // You can add logic here to change the language
                 },
-
                 items: <String>['Odia', 'English', 'Hindi', 'Bengali']
                     .map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
                     child: Container(
-                      width: 200, // Set the width of the dropdown item
+                      width: 200,
                       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8), // Set border radius
+                        borderRadius: BorderRadius.circular(8),
                         color: AppTheme.cardBackgroundColor(context),
-                        border: Border.all(
-                            color: AppTheme.borderColor(context))// Set background color
+                        border: Border.all(color: AppTheme.borderColor(context)),
                       ),
                       child: Text(
                         value,
                         style: TextStyle(
                           fontSize: 16,
-                          color: Colors.black, // Set text color
+                          color: Colors.black,
                         ),
                       ),
                     ),
@@ -62,7 +66,6 @@ class setting extends StatelessWidget {
               ),
             ),
             SizedBox(height: 18.0),
-
             Text(
               'Transliteration',
               style: Theme.of(context).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.bold),
@@ -78,18 +81,34 @@ class setting extends StatelessWidget {
               activeColor: Theme.of(context).hoverColor,
               inactiveColor: Colors.white,
               borderColor: AppTheme.borderColor(context),
-              borderWidth: 2.0,),
-
-            SizedBox(height: 18.0),
-            Text(
-              'Advance Settings ',
-              style: Theme.of(context).textTheme.headline6,
+              borderWidth: 2.0,
             ),
-
+            SizedBox(height: 18.0),
+            ListTile(
+              title: Text(
+                'Advance Settings',
+                style: Theme.of(context).textTheme.headline6,
+              ),
+              trailing: IconButton(
+                icon: Icon(_isExpanded ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down),
+                onPressed: () {
+                  setState(() {
+                    _isExpanded = !_isExpanded;
+                  });
+                },
+              ),
+            ),
+            if (_isExpanded) ...[
+              // Widgets to display when the section is expanded
+              SizedBox(height: 18.0),
+              Text('Additional Setting 1'),
+              SizedBox(height: 18.0),
+              Text('Additional Setting 2'),
+              // Add more widgets as needed
+            ],
           ],
         ),
       ),
     );
   }
-
 }
