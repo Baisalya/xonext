@@ -47,12 +47,7 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
             height: double.infinity,
           ),*/
           // Acrylic Blur Effect
-          BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 75, sigmaY: 85,tileMode: TileMode.repeated),
-            child: Container(
-              color: Colors.transparent,
-            ),
-          ),
+
           // Your Scaffold Content
           Scaffold(
             backgroundColor: Colors.transparent, // Make Scaffold background transparent

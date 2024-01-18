@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class BlurredCircleBackground extends StatefulWidget {
@@ -49,6 +51,12 @@ class _BlurredCircleBackgroundState extends State<BlurredCircleBackground>
                 _buildCircle(Colors.yellow.withOpacity(0.9), size: 250, alignment: Alignment(0.1, 0.2)),
               ],
             ),
+          ),
+        ),
+        BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 75, sigmaY: 85,tileMode: TileMode.repeated),
+          child: Container(
+            color: Colors.transparent,
           ),
         ),
       ],
