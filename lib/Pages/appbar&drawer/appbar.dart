@@ -132,7 +132,7 @@ class CustomDrawer extends StatelessWidget {
                       ],
                     ),
                   ),
-                  ElevatedButton(
+                  /*ElevatedButton(
                     onPressed: () {
                       Get.toNamed('/chat');
                       // Handle logout
@@ -152,7 +152,7 @@ class CustomDrawer extends StatelessWidget {
                         style: TextStyle(fontSize: 16.0),
                       ),
                     ),
-                  ),
+                  ),*/
                 ],
               ),
             ),

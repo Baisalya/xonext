@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../../utils/Customized/blurredcircular.dart';
 import '../appbar&drawer/appbar.dart';
 
 
@@ -38,15 +39,16 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
       body: Stack(
         children: [
           // Background Image with Acrylic Blur
-          Image.asset(
+          BlurredCircleBackground(isDark: Theme.of(context).brightness == Brightness.dark),
+          /*Image.asset(
             'assets/background.jpeg', // Replace with your image path
             fit: BoxFit.fitHeight,
             width: double.infinity,
             height: double.infinity,
-          ),
+          ),*/
           // Acrylic Blur Effect
           BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            filter: ImageFilter.blur(sigmaX: 75, sigmaY: 85,tileMode: TileMode.repeated),
             child: Container(
               color: Colors.transparent,
             ),
@@ -66,8 +68,9 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
                 ),
                 //Divider(height: 1.0),
                 Container(
+
                   decoration: BoxDecoration(
-                    color: Theme.of(context).cardColor,
+                    color: Colors.transparent,
                   ),
                   child: _buildTextComposer(),
                 ),
@@ -144,6 +147,7 @@ class ChatMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+
       margin: const EdgeInsets.symmetric(vertical: 10.0),
       child: Card(
         elevation: 5,
