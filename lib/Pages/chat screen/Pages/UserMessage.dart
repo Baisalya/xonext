@@ -43,9 +43,16 @@ class UserMessage extends StatelessWidget {
                             ),
                           ],
                         ),
+                        SizedBox(height: 5,),
                         Container(
                           margin: const EdgeInsets.only(top: 8.0),
-                          child: Text(text),
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.vertical,
+                            child: Text(
+                              text,
+                              softWrap: true,
+                            ),
+                          ),
                         ),
                       ],
                     ),
@@ -53,7 +60,8 @@ class UserMessage extends StatelessWidget {
                 ],
               ),
             ),
-          ),
+          )
+          ,
         ),
         Positioned(
           right: 0,

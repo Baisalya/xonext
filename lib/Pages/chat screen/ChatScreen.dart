@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:xonext/utils/AppTheme.dart';
 import '../../utils/Customized/blurredcircular.dart';
 import '../appbar&drawer/appbar.dart';
 import 'Pages/BotMessage.dart';
@@ -17,7 +18,7 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
   final TextEditingController _textController = TextEditingController();
   final List<Widget> _messages = <Widget>[];
   late TabController _tabController;
-
+  late ScrollController _scrollController; // Add this line
   void _handleSubmitted(String text) {
     _textController.clear();
 
@@ -40,6 +41,7 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this); // Adjust the length as needed
+    _scrollController = ScrollController(); // Initialize the ScrollController
   }
 
   @override
@@ -56,6 +58,7 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
               children: <Widget>[
                 Flexible(
                   child: ListView.builder(
+                    controller: _scrollController, // Attach the controller to the ListView
                     padding: EdgeInsets.all(8.0),
                     reverse: true,
                     itemCount: _messages.length,
@@ -71,6 +74,16 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
               ],
             ),
           ),
+          Align(
+            alignment: Alignment.topCenter,
+              child: IconButton(
+                  onPressed: (){ _scrollController.animateTo(
+                    0.0,
+                    duration: Duration(milliseconds: 500),
+                    curve: Curves.easeInOut,
+                  );},
+                  icon: Icon(Icons.arrow_circle_down_sharp)))
+
         ],
       ),
     );
@@ -80,8 +93,9 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppTheme.chatcomposer(context),
         borderRadius: BorderRadius.circular(24.0),
+        border: Border.all(color: AppTheme.borderColor(context)),
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.3),

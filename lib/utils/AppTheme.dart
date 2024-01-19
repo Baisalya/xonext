@@ -71,6 +71,11 @@ class AppTheme {
 
   static Tabselector(BuildContext context) =>
       Theme.of(context).brightness == Brightness.dark
-          ? Colors.white60 // Border color in dark mode
+          ? Colors.white60 //  color in dark mode
           : Colors.red;
+
+  static chatcomposer(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.dark
+          ? Colors.black38 // color in dark mode
+          : Colors.white60;
 }
