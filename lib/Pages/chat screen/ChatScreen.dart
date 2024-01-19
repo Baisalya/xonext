@@ -74,15 +74,19 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
               ],
             ),
           ),
-          Align(
-            alignment: Alignment.topCenter,
-              child: IconButton(
-                  onPressed: (){ _scrollController.animateTo(
-                    0.0,
-                    duration: Duration(milliseconds: 500),
-                    curve: Curves.easeInOut,
-                  );},
-                  icon: Icon(Icons.arrow_circle_down_sharp)))
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 0, 18, 100),
+            child: Align(
+              alignment: Alignment.bottomRight,
+                child: IconButton(
+                    onPressed: (){ _scrollController.animateTo(
+                      0.0,
+                      duration: Duration(milliseconds: 500),
+                      curve: Curves.easeInOut,
+                    );},
+                    icon: Icon(Icons.arrow_circle_down_sharp,
+                    size: 35,))),
+          ),
 
         ],
       ),
