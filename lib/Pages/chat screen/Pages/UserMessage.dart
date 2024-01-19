@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 
 class UserMessage extends StatelessWidget {
@@ -9,44 +7,63 @@ class UserMessage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 10.0),
-      child: Card(
-        elevation: 5,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.end,  // Align user messages to the right
-            children: <Widget>[
-              Flexible(
-                flex: 3,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,  // Align user messages to the right
-                  children: <Widget>[
-                    Text('User', style: Theme.of(context).textTheme.headline6),
-                    Container(
-                      margin: const EdgeInsets.only(top: 8.0),
-                      child: Text(text),
+    return Stack(
+      children: [
+        Container(
+          margin: const EdgeInsets.only(right: 50.0, bottom: 10.0),
+          child: Card(
+            elevation: 5,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Flexible(
+                    flex: 2,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: <Widget>[
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            IconButton(
+                              icon: Icon(Icons.edit),
+                              onPressed: () {
+                                // Add your logic for the first IconButton
+                              },
+                            ),
+                            IconButton(
+                              icon: Icon(Icons.delete),
+                              onPressed: () {
+                                // Add your logic for the second IconButton
+                              },
+                            ),
+                          ],
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(top: 8.0),
+                          child: Text(text),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              SizedBox(width: 16.0),
-              Flexible(
-                flex: 1,
-                child: CircleAvatar(
-                  backgroundColor: Colors.blue,
-                  child: Text('U', style: TextStyle(color: Colors.white)),
-                ),
-              ),
-            ],
+            ),
           ),
         ),
-      ),
+        Positioned(
+          right: 0,
+          top: 0,
+          child: CircleAvatar(
+            backgroundColor: Colors.blue,
+            child: Text('U', style: TextStyle(color: Colors.white)),
+          ),
+        ),
+      ],
     );
   }
 }

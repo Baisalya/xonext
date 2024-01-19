@@ -9,27 +9,26 @@ class BotMessage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 10.0),
-      child: Card(
-        elevation: 5,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,  // Align bot messages to the left
-            children: <Widget>[
-              Flexible(
-                flex: 1,
-                child: CircleAvatar(
-                  backgroundColor: Colors.green,  // Change to the color you prefer for the bot
-                  child: Text('B', style: TextStyle(color: Colors.white)),
-                ),
+      color: Colors.transparent,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(left: 8.0, right: 16.0),
+            child: CircleAvatar(
+              backgroundColor: Colors.green, // Change to the color you prefer for the bot
+              child: Text('B', style: TextStyle(color: Colors.white)),
+            ),
+          ),
+          Expanded(
+            child: Card(
+              elevation: 5,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
               ),
-              SizedBox(width: 16.0),
-              Flexible(
-                flex: 3,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
@@ -41,9 +40,9 @@ class BotMessage extends StatelessWidget {
                   ],
                 ),
               ),
-            ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
