@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class BotMessage extends StatelessWidget {
   final String text;
@@ -53,22 +54,28 @@ class BotMessage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
                 IconButton(
-                  icon: Icon(Icons.copy),
+                  icon: Icon(Icons.copy_all),
                   onPressed: () {
                     // Add your functionality for the third button
+                    _copyToClipboard(text, context);
                   },
+                    tooltip: 'Copy'
                 ),
                 IconButton(
-                  icon: Icon(Icons.thumb_up),
+                  icon: Icon(Icons.thumb_up_alt_outlined),
+                  selectedIcon: Icon(Icons.thumb_up_off_alt_rounded),
                   onPressed: () {
                     // Add your functionality for the first button
-                  },
+                  },tooltip: 'Like'
                 ),
                 IconButton(
-                  icon: Icon(Icons.thumb_down),
-                  onPressed: () {
+                  icon: Icon(Icons.thumb_down_alt_outlined),
+                    selectedIcon: Icon(Icons.thumb_down_alt_rounded),
+
+                    onPressed: () {
                     // Add your functionality for the second button
                   },
+                    tooltip: 'Dislike'
                 ),
 
               ],
@@ -78,4 +85,11 @@ class BotMessage extends StatelessWidget {
       ),
     );
   }
-}
+
+
+  void _copyToClipboard(String text, BuildContext context) {
+    Clipboard.setData(ClipboardData(text: text));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Text copied to clipboard')),
+    );
+  }}
