@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+
+import '../../../utils/Fontsize.dart';
 
 class BotMessage extends StatelessWidget {
   final String text;
@@ -39,7 +42,8 @@ class BotMessage extends StatelessWidget {
                         Text('Bot', style: Theme.of(context).textTheme.headline6),
                         Container(
                           margin: const EdgeInsets.only(top: 8.0),
-                          child: Text(text),
+                          child: Text(text,
+                            style:TextStyle(fontSize: Provider.of<FontSizeNotifier>(context).fontSize),                           ),
                         ),
                       ],
                     ),

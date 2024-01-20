@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '../../../utils/AppTheme.dart';
 import '../../../utils/Customized/CustomSlider.dart';
 import '../../../utils/Customized/CustomizedSwitch.dart';
+import '../../../utils/Fontsize.dart';
 import '../../../utils/ThemeNotifier.dart';
 
 class Usersetting extends StatelessWidget {
@@ -74,18 +75,30 @@ class Usersetting extends StatelessWidget {
                       overlayShape: RoundSliderOverlayShape(overlayRadius: 16.0),
                       overlayColor: Colors.blue.withOpacity(0.3),
                     ),
-                    child: Slider(
-                      value: 1.0,
-                      min: 1.0,
-                      max: 4.0,
-                      divisions: 3,
-                      onChanged: (double value) {
-                        // Handle font size adjustment based on the slider value
-                      },
-                      label: _getLabel(1.0), // Initial label
-                      activeColor: AppTheme.sliderActiveColor(context),
-                      inactiveColor: AppTheme.sliderInactiveColor(context),
-                    ),
+                    child:  Slider(
+                  value: Provider.of<FontSizeNotifier>(context).fontSize,
+                  min: 10.0,
+                  max: 40.0,
+                  divisions: 3,
+                  onChanged: (double value) {
+                    double fontSize;
+
+                    if (value <= 15.0) {
+                      fontSize = 10.0; // Font size increments to 10 when value is less than or equal to 15
+                    } else if (value <= 25.0) {
+                      fontSize = 25.0; // Font size increments to 25 when value is less than or equal to 25
+                    } else if (value <= 35.0) {
+                      fontSize = 30.0; // Font size increments to 30 when value is less than or equal to 35
+                    } else {
+                      fontSize = 40.0; // Font size increments to 40 when value is greater than 35
+                    }
+
+                    Provider.of<FontSizeNotifier>(context, listen: false).setFontSize(fontSize);
+                  },
+                  label: _getLabel(1.0), // Initial label
+                  activeColor: AppTheme.sliderActiveColor(context),
+                  inactiveColor: AppTheme.sliderInactiveColor(context),
+                ),
                   )
 
 
@@ -126,14 +139,15 @@ class Usersetting extends StatelessWidget {
     );
   }
   String _getLabel(double value) {
-    Map<double, String> labels = {
-      1.0: 'Small',
-      2.0: 'Medium',
-      3.0: 'Large',
-      4.0: 'Extra large',
+    Map<int, String> labels = {
+      1: 'Small',
+      2: 'Medium',
+      3: 'Large',
+      4: 'Extra large',
     };
 
-    return labels[value] ?? ''; // Return the label for the given value, or an empty string if not found
+    int intValue = value.toInt();
+    return labels[intValue] ?? '';
   }
 
 }

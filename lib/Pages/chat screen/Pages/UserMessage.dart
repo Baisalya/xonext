@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../../utils/Fontsize.dart';
 
 class UserMessage extends StatelessWidget {
   final String text;
@@ -48,10 +51,8 @@ class UserMessage extends StatelessWidget {
                           margin: const EdgeInsets.only(top: 8.0),
                           child: SingleChildScrollView(
                             scrollDirection: Axis.vertical,
-                            child: Text(
-                              text,
-                              softWrap: true,
-                            ),
+                            child: Text(text,
+                              softWrap: true, style: TextStyle(fontSize: Provider.of<FontSizeNotifier>(context).fontSize),                           ),
                           ),
                         ),
                       ],

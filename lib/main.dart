@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:xonext/utils/Fontsize.dart';
 import 'package:xonext/utils/ThemeNotifier.dart';
 
 import 'Routes/AppRoutes.dart';
@@ -10,12 +11,16 @@ import 'package:flutter/material.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => ThemeNotifier(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => ThemeNotifier()),
+        ChangeNotifierProvider(create: (context) => FontSizeNotifier()),
+      ],
       child: MyApp(),
     ),
   );
 }
+
 
 
 class MyApp extends StatelessWidget {
