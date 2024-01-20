@@ -18,7 +18,8 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
   final TextEditingController _textController = TextEditingController();
   final List<Widget> _messages = <Widget>[];
   late TabController _tabController;
-  late ScrollController _scrollController; // Add this line
+  late ScrollController _scrollController;
+  bool showScrollToBottomIcon = false;
   void _handleSubmitted(String text) {
     _textController.clear();
 
@@ -40,12 +41,21 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 2, vsync: this); // Adjust the length as needed
-    _scrollController = ScrollController(); // Initialize the ScrollController
+    _tabController = TabController(length: 2, vsync: this);
+    _scrollController = ScrollController();
+
+    _scrollController.addListener(() {
+      setState(() {
+        // Check if scrolling is needed
+        showScrollToBottomIcon =
+            _scrollController.position.pixels > 100; // Adjust threshold as needed
+      });
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: CustomAppBar(),
       drawer: CustomDrawer(tabController: _tabController),
@@ -74,20 +84,24 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0, 0, 18, 100),
-            child: Align(
-              alignment: Alignment.bottomRight,
-                child: IconButton(
-                    onPressed: (){ _scrollController.animateTo(
-                      0.0,
-                      duration: Duration(milliseconds: 500),
-                      curve: Curves.easeInOut,
-                    );},
-                    icon: Icon(Icons.arrow_circle_down_sharp,
-                    size: 35,))),
-          ),
-
+          if (showScrollToBottomIcon)
+            Positioned(
+              bottom: 100,
+              right: 8,
+              child: IconButton(
+                onPressed: () {
+                  _scrollController.animateTo(
+                    0.0,
+                    duration: Duration(milliseconds: 500),
+                    curve: Curves.easeInOut,
+                  );
+                },
+                icon: Icon(
+                  Icons.arrow_circle_down_sharp,
+                  size: 35,
+                ),
+              ),
+            ),
         ],
       ),
     );
