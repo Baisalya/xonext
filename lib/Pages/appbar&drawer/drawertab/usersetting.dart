@@ -75,30 +75,46 @@ class Usersetting extends StatelessWidget {
                       overlayShape: RoundSliderOverlayShape(overlayRadius: 16.0),
                       overlayColor: Colors.blue.withOpacity(0.3),
                     ),
-                    child:  Slider(
-                  value: Provider.of<FontSizeNotifier>(context).fontSize,
-                  min: 10.0,
-                  max: 40.0,
-                  divisions: 3,
-                  onChanged: (double value) {
-                    double fontSize;
+                    child: Slider(
+                      value: Provider.of<FontSizeNotifier>(context).fontSize,
+                      min: 16.0,
+                      max: 40.0,
+                      divisions: 3,
+                      onChanged: (double value) {
+                        double fontSize;
 
-                    if (value <= 15.0) {
-                      fontSize = 10.0; // Font size increments to 10 when value is less than or equal to 15
-                    } else if (value <= 25.0) {
-                      fontSize = 25.0; // Font size increments to 25 when value is less than or equal to 25
-                    } else if (value <= 35.0) {
-                      fontSize = 30.0; // Font size increments to 30 when value is less than or equal to 35
-                    } else {
-                      fontSize = 40.0; // Font size increments to 40 when value is greater than 35
-                    }
+                        if (value <= 20.0) {
+                          fontSize = 16.0;
+                        } else if (value <= 30.0) {
+                          fontSize = 25.0;
+                        } else if (value <= 35.0) {
+                          fontSize = 30.0;
+                        } else {
+                          fontSize = 40.0;
+                        }
 
-                    Provider.of<FontSizeNotifier>(context, listen: false).setFontSize(fontSize);
-                  },
-                  label: _getLabel(1.0), // Initial label
-                  activeColor: AppTheme.sliderActiveColor(context),
-                  inactiveColor: AppTheme.sliderInactiveColor(context),
-                ),
+                        Provider.of<FontSizeNotifier>(context, listen: false).setFontSize(fontSize);
+                      },
+                      label: (() {
+                        double value = Provider.of<FontSizeNotifier>(context).fontSize;
+
+                        if (value == 16.0) {
+                          return 'Small';
+                        } else if (value == 25.0) {
+                          return 'Medium';
+                        } else if (value == 30.0) {
+                          return 'Large';
+                        } else {
+                          return 'Extra Large';
+                        }
+                      })(),
+                      activeColor: AppTheme.sliderActiveColor(context),
+                      inactiveColor: AppTheme.sliderInactiveColor(context),
+                    ),
+
+
+
+
                   )
 
 
@@ -137,17 +153,6 @@ class Usersetting extends StatelessWidget {
         ),
       ),
     );
-  }
-  String _getLabel(double value) {
-    Map<int, String> labels = {
-      1: 'Small',
-      2: 'Medium',
-      3: 'Large',
-      4: 'Extra large',
-    };
-
-    int intValue = value.toInt();
-    return labels[intValue] ?? '';
   }
 
 }
