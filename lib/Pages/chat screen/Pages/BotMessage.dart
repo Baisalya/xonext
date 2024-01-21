@@ -24,8 +24,11 @@ class BotMessage extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 8.0, right: 16.0),
                 child: CircleAvatar(
                   backgroundColor: Colors.green,
-                  child: Text('B', style: TextStyle(color: Colors.white)),
-                ),
+                  child: Theme.of(context).brightness == Brightness.dark
+                      ? Image.asset('assets/Applogo/mo_chatbot_dark.png', width: 24, height: 24, color: Colors.white)
+                      : Image.asset('assets/Applogo/mo_chatbot_light.png', width: 24, height: 24, color: Colors.white),
+                )
+                ,
               ),
               Expanded(
                 child: Card(
