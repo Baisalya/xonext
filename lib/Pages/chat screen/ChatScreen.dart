@@ -21,17 +21,23 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
   late ScrollController _scrollController;
   bool showScrollToBottomIcon = false;
   void _handleSubmitted(String text) {
+    // Check if the text is empty
+    if (text.trim().isEmpty) {
+      return; // Do nothing if the text is empty
+    }
     _textController.clear();
 
     // User message
     UserMessage userMessage = UserMessage(text: text);
-
+    setState(() {
+      _messages.insert(0, userMessage);  // Add user message to the list immediately
+    });
     // Simulating bot reply after a delay
     Future.delayed(Duration(seconds: 2), () {
       BotMessage botReply = BotMessage(text: 'This is a bot reply');  // Replace with actual bot reply
 
       setState(() {
-        _messages.insert(0, userMessage);  // Add user message to the list
+      //  _messages.insert(0, userMessage);  // Add user message to the list
         _messages.insert(0, botReply);  // Add bot reply to the list
 
       });
