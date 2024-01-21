@@ -78,4 +78,9 @@ class AppTheme {
       Theme.of(context).brightness == Brightness.dark
           ? Colors.black38 // color in dark mode
           : Colors.white60;
+
+  static boticonbackgroud(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.dark
+          ? Colors.white // Border color in dark mode
+          : Colors.black; // Border color in light mode
 }

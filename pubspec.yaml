@@ -50,6 +50,8 @@ flutter:
       - assets/
       - assets/Onboarding/
       - assets/Applogo/
+      - assets/Applogo/mo_chatbot_dark.png
+      - assets/Applogo/mo_chatbot_light.png
       - assets/ServiceLogo/
 flutter_icons:
    android: true

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:xonext/utils/AppTheme.dart';
 
 import '../../../utils/Fontsize.dart';
 
@@ -23,10 +24,10 @@ class BotMessage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 8.0, right: 16.0),
                 child: CircleAvatar(
-                  backgroundColor: Colors.green,
+                  backgroundColor: AppTheme.boticonbackgroud(context),
                   child: Theme.of(context).brightness == Brightness.dark
-                      ? Image.asset('assets/Applogo/mo_chatbot_dark.png', width: 24, height: 24, color: Colors.white)
-                      : Image.asset('assets/Applogo/mo_chatbot_light.png', width: 24, height: 24, color: Colors.white),
+                      ? Image.asset('assets/Applogo/mo_chatbot_dark.png', width: 34, height: 34,)
+                      : Image.asset('assets/Applogo/mo_chatbot_light.png', width: 34, height: 34,),
                 )
                 ,
               ),
