@@ -18,6 +18,7 @@ class _SettingState extends State<Setting> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
 
     return Card(
       elevation: 9.0,
@@ -49,17 +50,22 @@ class _SettingState extends State<Setting> {
                     value: value,
                     child: Container(
                       width: screenWidth * 0.4, // Adjust the width here
-                      padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04, vertical: screenWidth * 0.02),
+                      height: screenHeight * 0.7,
+                 /*     padding: EdgeInsets.symmetric(
+                          horizontal: screenWidth * 0.08,
+                          vertical: screenWidth * 0.1),*/
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(screenWidth * 0.02), // Adjust the border radius
+                        borderRadius: BorderRadius.circular(screenWidth * 0.01), // Adjust the border radius
                         color: AppTheme.cardBackgroundColor(context),
                         border: Border.all(color: AppTheme.borderColor(context)),
                       ),
-                      child: Text(
-                        value,
-                        style: TextStyle(
-                          fontSize: screenWidth * 0.04, // Adjust font size based on screen width
-                          color: Colors.black,
+                      child: Center(
+                        child: Text(
+                          value,
+                          style: TextStyle(
+                            fontSize: screenWidth * 0.04, // Adjust font size based on screen width
+                            color: Colors.black,
+                          ),
                         ),
                       ),
                     ),

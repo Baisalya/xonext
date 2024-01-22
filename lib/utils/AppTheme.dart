@@ -4,8 +4,8 @@ class AppTheme {
   // Colors
   static const Color primaryColor = Color(0xFF3498DB); // Change to your primary color
   static const Color secondaryColor = Color(0xFFE74C3C); // Change to your secondary color
-  static const Color backgroundColor = Color(0xFFFFFFFF); // Change to your background color
-  static const Color buttonColor = Color(0xFF27AE60); // Change to your button color
+  static const Color backgroundColors = Color(0xFFFFFFFF); // Change to your background color
+      static const Color buttonColor = Color(0xFF27AE60); // Change to your button color
   static const Color headingTextColor = Color(0xFF333333); // Change to your heading text color
   static const Color subtitleTextColor = Color(0xFF666666); // Change to your subtitle text color
   static const Color warningErrorTextColor = Color(0xFFE74C3C); // Change to your warning/error text color
@@ -44,6 +44,16 @@ class AppTheme {
     fontSize: 16.0,
   );
   //day and night
+  static Color appbarbackground(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.dark
+          ? Colors.black38 // Set your dark mode background color here
+          : Colors.white; // Set your light mode background color here
+
+  static Color backgroundColor(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.dark
+          ? Colors.black38 // Set your dark mode background color here
+          : Colors.white; // Set your light mode background color here
+
   static Color cardBackgroundColor(BuildContext context) =>
       Theme.of(context).brightness == Brightness.dark
           ? Colors.white60 // Set your dark mode background color here
@@ -82,5 +92,10 @@ class AppTheme {
   static boticonbackgroud(BuildContext context) =>
       Theme.of(context).brightness == Brightness.dark
           ? Colors.white // Border color in dark mode
-          : Colors.black; // Border color in light mode
+          : Colors.black;
+
+  static iconcolor(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.dark
+          ? Colors.white60 // Set your dark mode background color here
+          : Colors.black87; // Set your light mode background color here
 }

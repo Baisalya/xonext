@@ -46,8 +46,8 @@ class _BlurredCircleBackgroundState extends State<BlurredCircleBackground>
             child: Stack(
               children: [
                 _buildCircle(Colors.blue.withOpacity(0.8), size: 200, alignment: Alignment(0.4, 0.4)),
-                _buildCircle(Colors.red.withOpacity(0.7), size: 180, alignment: Alignment(0.3, -0.1)),
-                _buildCircle(Colors.purple.withOpacity(0.6), size: 220, alignment: Alignment(0.2, -0.1)),
+                _buildCircle(Colors.red.withOpacity(0.7), size: 180, alignment: Alignment(0.5, 0.0)),
+                _buildCircle(Colors.purple.withOpacity(0.6), size: 220, alignment: Alignment(0.3, -0.1)),
                 _buildCircle(Colors.yellow.withOpacity(0.9), size: 250, alignment: Alignment(0.1, 0.2)),
               ],
             ),

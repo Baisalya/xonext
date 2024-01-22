@@ -155,13 +155,13 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
             ),
           ),
           IconButton(
-            icon: Icon(FontAwesomeIcons.language, color: Color(0xFF000F3B)),
+            icon: Icon(FontAwesomeIcons.language, color: AppTheme.iconcolor(context)),
             onPressed: () {
               // Add your logic for the attach button here
             },
           ),
           IconButton(
-            icon: Icon(Icons.send, color: Color(0xFF000F3B)),
+            icon: Icon(Icons.send, color: AppTheme.iconcolor(context)),
             onPressed: () => _handleSubmitted(_textController.text),
           ),
         ],

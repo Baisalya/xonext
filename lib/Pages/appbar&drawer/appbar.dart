@@ -26,8 +26,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              Color(0xFF000F3B), // Darker color
-              Color(0xFF001F77), // Lighter color
+              Color(0xFF73D375), // Darker color
+              Color(0xFFB6C45D), // Lighter color
             ],
           ),
         ),
@@ -52,92 +52,98 @@ class CustomDrawer extends StatelessWidget {
 
     return Drawer(
       child: SafeArea(
-        child: Column(
-          children: [
-            Container(
-              padding: EdgeInsets.all(screenWidth * 0.04), // Adjust padding based on screen width
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CircleAvatar(
-                    backgroundImage: AssetImage('assets/Applogo/applogo.png'),
-                    radius: screenWidth * 0.05, // Adjust radius based on screen width
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.arrow_back_ios),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ],
+        child: Container(
+          color: AppTheme.backgroundColor(context),
+          child: Column(
+            children: [
+              Container(
+                padding: EdgeInsets.all(screenWidth * 0.02),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    CircleAvatar(
+                      backgroundImage: AssetImage('assets/Applogo/applogo.png'),
+                      backgroundColor: AppTheme.backgroundColor(context),
+                      radius: screenWidth * 0.05,
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.arrow_back_ios),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ],
+                ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.fromLTRB(screenWidth * 0.02, 0, screenWidth * 0.02, 0), // Adjust padding based on screen width
-              child: Divider(
-                color: AppTheme.dividercolor(context),
-                thickness: 2,
+              Padding(
+                padding: EdgeInsets.fromLTRB(screenWidth * 0.02, 0, screenWidth * 0.02, 0),
+                child: Divider(
+                  color: AppTheme.dividercolor(context),
+                  thickness: 2,
+                ),
               ),
-            ),
-            SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              child: Column(
-                children: [
-                  DefaultTabController(
-                    length: 2,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          width: screenWidth * 0.15, // Adjust the width here
-                          child: RotatedBox(
-                            quarterTurns: -1,
-                            child: TabBar(
-                              controller: tabController,
-                              isScrollable: true,
-                              labelColor: Colors.blue,
-                              tabs: [
-                                RotatedBox(
-                                  quarterTurns: 1,
-                                  child: Tab(
-                                    icon: Image.asset('assets/setting.png', width: screenWidth * 0.07, height: screenWidth * 0.07),
+              Expanded(
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  child: Column(
+                    children: [
+                      DefaultTabController(
+                        length: 2,
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: screenWidth * 0.15,
+                              child: RotatedBox(
+                                quarterTurns: -1,
+                                child: TabBar(
+                                  controller: tabController,
+                                  isScrollable: true,
+                                  labelColor: Colors.blue,
+                                  tabs: [
+                                    RotatedBox(
+                                      quarterTurns: 1,
+                                      child: Tab(
+                                        icon: Image.asset('assets/setting.png', width: screenWidth * 0.07, height: screenWidth * 0.07, color: AppTheme.iconcolor(context)),
+                                      ),
+                                    ),
+                                    RotatedBox(
+                                      quarterTurns: 1,
+                                      child: Tab(
+                                        icon: Image.asset('assets/Applogo/applogo.png', width: screenWidth * 0.09, height: screenWidth * 0.09),
+                                      ),
+                                    ),
+                                  ],
+                                  indicatorSize: TabBarIndicatorSize.label,
+                                  indicator: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(screenWidth * 0.02),
+                                    color: AppTheme.Tabselector(context),
                                   ),
                                 ),
-                                RotatedBox(
-                                  quarterTurns: 1,
-                                  child: Tab(
-                                    icon: Image.asset('assets/Applogo/applogo.png', width: screenWidth * 0.09, height: screenWidth * 0.09),
-                                  ),
-                                ),
-                              ],
-                              indicatorSize: TabBarIndicatorSize.label,
-                              indicator: BoxDecoration(
-                                borderRadius: BorderRadius.circular(screenWidth * 0.02),
-                                color: AppTheme.Tabselector(context),
                               ),
                             ),
-                          ),
-                        ),
-                        Expanded(
-                          child: Container(
-                            height: screenHeight * 0.46, // Adjust the height as needed
-                            child: TabBarView(
-                              controller: tabController,
-                              physics: ClampingScrollPhysics(),
-                              children: [
-                                SingleChildScrollView(child: Setting()),
-                                SingleChildScrollView(child: Usersetting()),
-                              ],
+                            Expanded(
+                              child: Container(
+                                height: screenHeight * 0.72,
+                                child: TabBarView(
+                                  controller: tabController,
+                                  physics: ClampingScrollPhysics(),
+                                  children: [
+                                    SingleChildScrollView(child: Setting()),
+                                    SingleChildScrollView(child: Usersetting()),
+                                  ],
+                                ),
+                              ),
                             ),
-                          ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
       width: double.infinity,
