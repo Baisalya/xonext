@@ -121,7 +121,7 @@ class Usersetting extends StatelessWidget {
             ),
             SizedBox(height: screenHeight * 0.02),
             Text("The text font size will adjust"),
-            SizedBox(height: screenHeight * 0.03),
+            SizedBox(height: screenHeight * 0.056),
             ElevatedButton(
               onPressed: () {
                 Get.toNamed('/login');

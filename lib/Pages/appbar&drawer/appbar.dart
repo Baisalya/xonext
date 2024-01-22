@@ -57,7 +57,7 @@ class CustomDrawer extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                padding: EdgeInsets.all(screenWidth * 0.02),
+                padding: EdgeInsets.all(screenWidth * 0.01),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

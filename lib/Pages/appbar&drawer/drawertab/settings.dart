@@ -25,10 +25,10 @@ class _SettingState extends State<Setting> {
       color: AppTheme.cardBackgroundColor(context),
       shadowColor: Colors.grey.shade700,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(screenWidth * 0.04), // Adjust border radius based on screen width
+        borderRadius: BorderRadius.circular(screenWidth * 0.04),
       ),
       child: Padding(
-        padding: EdgeInsets.all(screenWidth * 0.04), // Adjust padding based on screen width
+        padding: EdgeInsets.all(screenWidth * 0.04),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -36,7 +36,7 @@ class _SettingState extends State<Setting> {
               'Choose Language',
               style: Theme.of(context).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: screenWidth * 0.04), // Adjust spacing based on screen width
+            SizedBox(height: screenWidth * 0.04),
             DropdownButtonHideUnderline(
               child: DropdownButton<String>(
                 value: 'English',
@@ -44,18 +44,13 @@ class _SettingState extends State<Setting> {
                   // Handle dropdown value change
                   // You can add logic here to change the language
                 },
-                items: <String>['Odia', 'English', 'Hindi', 'Bengali']
-                    .map<DropdownMenuItem<String>>((String value) {
+                items: <String>['Odia', 'English', 'Hindi', 'Bengali'].map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
                     child: Container(
-                      width: screenWidth * 0.4, // Adjust the width here
-                      height: screenHeight * 0.7,
-                 /*     padding: EdgeInsets.symmetric(
-                          horizontal: screenWidth * 0.08,
-                          vertical: screenWidth * 0.1),*/
+                      width: screenWidth * 0.6,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(screenWidth * 0.01), // Adjust the border radius
+                        borderRadius: BorderRadius.circular(screenWidth * 0.01),
                         color: AppTheme.cardBackgroundColor(context),
                         border: Border.all(color: AppTheme.borderColor(context)),
                       ),
@@ -63,7 +58,7 @@ class _SettingState extends State<Setting> {
                         child: Text(
                           value,
                           style: TextStyle(
-                            fontSize: screenWidth * 0.04, // Adjust font size based on screen width
+                            fontSize: screenWidth * 0.04,
                             color: Colors.black,
                           ),
                         ),
@@ -73,25 +68,24 @@ class _SettingState extends State<Setting> {
                 }).toList(),
               ),
             ),
-            SizedBox(height: screenWidth * 0.04), // Adjust spacing based on screen width
+            SizedBox(height: screenWidth * 0.04),
             Text(
               'Transliteration',
               style: Theme.of(context).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: screenWidth * 0.04), // Adjust spacing based on screen width
+            SizedBox(height: screenWidth * 0.04),
             CustomizedSwitch(
               value: Theme.of(context).brightness == Brightness.dark,
               onChanged: (value) {
                 ThemeMode selectedMode = value ? ThemeMode.dark : ThemeMode.light;
-                Provider.of<ThemeNotifier>(context, listen: false)
-                    .setTheme(selectedMode);
+                Provider.of<ThemeNotifier>(context, listen: false).setTheme(selectedMode);
               },
               activeColor: Theme.of(context).hoverColor,
               inactiveColor: Colors.white,
               borderColor: AppTheme.borderColor(context),
               borderWidth: 2.0,
             ),
-            SizedBox(height: screenWidth * 0.04), // Adjust spacing based on screen width
+            SizedBox(height: screenWidth * 0.04),
             ListTile(
               title: Text(
                 'Advance Settings',
@@ -118,7 +112,6 @@ class _SettingState extends State<Setting> {
                   ],
                 ),
               ),
-
           ],
         ),
       ),
