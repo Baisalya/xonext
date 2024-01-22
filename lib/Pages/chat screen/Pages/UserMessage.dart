@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 
 import '../../../utils/Fontsize.dart';
 
+
+
 class UserMessage extends StatelessWidget {
   final String text;
 
@@ -29,30 +31,19 @@ class UserMessage extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: <Widget>[
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            IconButton(
-                              icon: Icon(Icons.edit),
-                              onPressed: () {
-                                // Add your logic for the first IconButton
-                              },
-                            ),
-                            IconButton(
-                              icon: Icon(Icons.delete),
-                              onPressed: () {
-                                // Add your logic for the second IconButton
-                              },
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 5,),
+                        _buildActionButtons(context),
+                        SizedBox(height: 5),
                         Container(
                           margin: const EdgeInsets.only(top: 8.0),
                           child: SingleChildScrollView(
                             scrollDirection: Axis.vertical,
-                            child: Text(text,
-                              softWrap: true, style: TextStyle(fontSize: Provider.of<FontSizeNotifier>(context).fontSize),                           ),
+                            child: Text(
+                              text,
+                              softWrap: true,
+                              style: TextStyle(
+                                fontSize: Provider.of<FontSizeNotifier>(context).fontSize,
+                              ),
+                            ),
                           ),
                         ),
                       ],
@@ -61,8 +52,7 @@ class UserMessage extends StatelessWidget {
                 ],
               ),
             ),
-          )
-          ,
+          ),
         ),
         Positioned(
           right: 0,
@@ -71,6 +61,26 @@ class UserMessage extends StatelessWidget {
             backgroundColor: Colors.blue,
             child: Text('U', style: TextStyle(color: Colors.white)),
           ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildActionButtons(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        IconButton(
+          icon: Icon(Icons.edit),
+          onPressed: () {
+            // Add your logic for the edit IconButton
+          },
+        ),
+        IconButton(
+          icon: Icon(Icons.delete),
+          onPressed: () {
+            // Add your logic for the delete IconButton
+          },
         ),
       ],
     );

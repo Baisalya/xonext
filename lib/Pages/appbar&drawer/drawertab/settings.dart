@@ -17,15 +17,17 @@ class _SettingState extends State<Setting> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+
     return Card(
       elevation: 9.0,
       color: AppTheme.cardBackgroundColor(context),
       shadowColor: Colors.grey.shade700,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15.0),
+        borderRadius: BorderRadius.circular(screenWidth * 0.04), // Adjust border radius based on screen width
       ),
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(screenWidth * 0.04), // Adjust padding based on screen width
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -33,7 +35,7 @@ class _SettingState extends State<Setting> {
               'Choose Language',
               style: Theme.of(context).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 18.0),
+            SizedBox(height: screenWidth * 0.04), // Adjust spacing based on screen width
             DropdownButtonHideUnderline(
               child: DropdownButton<String>(
                 value: 'English',
@@ -46,17 +48,17 @@ class _SettingState extends State<Setting> {
                   return DropdownMenuItem<String>(
                     value: value,
                     child: Container(
-                      width: 200,
-                      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      width: screenWidth * 0.4, // Adjust the width here
+                      padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04, vertical: screenWidth * 0.02),
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(screenWidth * 0.02), // Adjust the border radius
                         color: AppTheme.cardBackgroundColor(context),
                         border: Border.all(color: AppTheme.borderColor(context)),
                       ),
                       child: Text(
                         value,
                         style: TextStyle(
-                          fontSize: 16,
+                          fontSize: screenWidth * 0.04, // Adjust font size based on screen width
                           color: Colors.black,
                         ),
                       ),
@@ -65,12 +67,12 @@ class _SettingState extends State<Setting> {
                 }).toList(),
               ),
             ),
-            SizedBox(height: 18.0),
+            SizedBox(height: screenWidth * 0.04), // Adjust spacing based on screen width
             Text(
               'Transliteration',
               style: Theme.of(context).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 18.0),
+            SizedBox(height: screenWidth * 0.04), // Adjust spacing based on screen width
             CustomizedSwitch(
               value: Theme.of(context).brightness == Brightness.dark,
               onChanged: (value) {
@@ -83,7 +85,7 @@ class _SettingState extends State<Setting> {
               borderColor: AppTheme.borderColor(context),
               borderWidth: 2.0,
             ),
-            SizedBox(height: 18.0),
+            SizedBox(height: screenWidth * 0.04), // Adjust spacing based on screen width
             ListTile(
               title: Text(
                 'Advance Settings',
@@ -98,17 +100,23 @@ class _SettingState extends State<Setting> {
                 },
               ),
             ),
-            if (_isExpanded) ...[
-              // Widgets to display when the section is expanded
-              SizedBox(height: 18.0),
-              Text('Additional Setting 1'),
-              SizedBox(height: 18.0),
-              Text('Additional Setting 2'),
-              // Add more widgets as needed
-            ],
+            if (_isExpanded)
+              SingleChildScrollView(
+                child: Column(
+                  children: [
+                    SizedBox(height: screenWidth * 0.04),
+                    Text('Additional Setting 1'),
+                    SizedBox(height: screenWidth * 0.04),
+                    Text('Additional Setting 2'),
+                    // Add more widgets as needed
+                  ],
+                ),
+              ),
+
           ],
         ),
       ),
     );
   }
 }
+

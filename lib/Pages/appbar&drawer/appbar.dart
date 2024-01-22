@@ -47,39 +47,41 @@ class CustomDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return Drawer(
       child: SafeArea(
         child: Column(
           children: [
-        Container(
-        padding: EdgeInsets.all(16.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            CircleAvatar(
-              backgroundImage: AssetImage('assets/Applogo/applogo.png'),
-              radius: 25.0,
+            Container(
+              padding: EdgeInsets.all(screenWidth * 0.04), // Adjust padding based on screen width
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  CircleAvatar(
+                    backgroundImage: AssetImage('assets/Applogo/applogo.png'),
+                    radius: screenWidth * 0.05, // Adjust radius based on screen width
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.arrow_back_ios),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
             ),
-            IconButton(
-              icon: Icon(Icons.arrow_back_ios),
-              onPressed: () {
-                // Handle back button press
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        ),
-    ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(10.0,0,10,0),
+              padding: EdgeInsets.fromLTRB(screenWidth * 0.02, 0, screenWidth * 0.02, 0), // Adjust padding based on screen width
               child: Divider(
                 color: AppTheme.dividercolor(context),
                 thickness: 2,
               ),
             ),
             SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Column(
+              scrollDirection: Axis.vertical,
+              child: Column(
                 children: [
                   DefaultTabController(
                     length: 2,
@@ -87,6 +89,7 @@ class CustomDrawer extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
+                          width: screenWidth * 0.15, // Adjust the width here
                           child: RotatedBox(
                             quarterTurns: -1,
                             child: TabBar(
@@ -95,36 +98,35 @@ class CustomDrawer extends StatelessWidget {
                               labelColor: Colors.blue,
                               tabs: [
                                 RotatedBox(
-                                  quarterTurns:1,
+                                  quarterTurns: 1,
                                   child: Tab(
-                                    icon: Image.asset('assets/setting.png', width: 35.0, height: 35.0),
+                                    icon: Image.asset('assets/setting.png', width: screenWidth * 0.07, height: screenWidth * 0.07),
                                   ),
                                 ),
                                 RotatedBox(
-                                  quarterTurns:1,
+                                  quarterTurns: 1,
                                   child: Tab(
-                                    icon: Image.asset('assets/Applogo/applogo.png', width: 45.0, height: 45.0),
+                                    icon: Image.asset('assets/Applogo/applogo.png', width: screenWidth * 0.09, height: screenWidth * 0.09),
                                   ),
                                 ),
                               ],
-                              indicatorSize: TabBarIndicatorSize.label, // You can use TabBarIndicatorSize.tab for different style
+                              indicatorSize: TabBarIndicatorSize.label,
                               indicator: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10), // You can customize the border radius
-                                color: AppTheme.Tabselector(context) // You can set your preferred color
+                                borderRadius: BorderRadius.circular(screenWidth * 0.02),
+                                color: AppTheme.Tabselector(context),
                               ),
                             ),
                           ),
                         ),
                         Expanded(
                           child: Container(
-                            height: MediaQuery.of(context).size.width, // Adjust the height as needed
+                            height: screenHeight * 0.46, // Adjust the height as needed
                             child: TabBarView(
                               controller: tabController,
-                              physics: NeverScrollableScrollPhysics(),
+                              physics: ClampingScrollPhysics(),
                               children: [
-                                Setting()  ,
-                                Usersetting(),
-
+                                SingleChildScrollView(child: Setting()),
+                                SingleChildScrollView(child: Usersetting()),
                               ],
                             ),
                           ),
@@ -132,35 +134,13 @@ class CustomDrawer extends StatelessWidget {
                       ],
                     ),
                   ),
-                  /*ElevatedButton(
-                    onPressed: () {
-                      Get.toNamed('/chat');
-                      // Handle logout
-                    },
-                    style: ElevatedButton.styleFrom(
-                      primary:  Colors.red, // Set the primary color to orange
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 12.0,
-                      ),
-                      child: Text(
-                        'Logout',
-                        style: TextStyle(fontSize: 16.0),
-                      ),
-                    ),
-                  ),*/
                 ],
               ),
             ),
-
           ],
         ),
       ),
-      width: double.infinity, // Set the width to take up the full screen
+      width: double.infinity,
     );
   }
 }
