@@ -124,14 +124,22 @@ class CustomDrawer extends StatelessWidget {
                             ),
                             Expanded(
                               child: Container(
-                                height: screenHeight * 0.72,
-                                child: TabBarView(
-                                  controller: tabController,
-                                  physics: ClampingScrollPhysics(),
-                                  children: [
-                                    SingleChildScrollView(child: Setting()),
-                                    SingleChildScrollView(child: Usersetting()),
-                                  ],
+                                height: screenHeight * 0.5,
+                                child: Card(
+                                  elevation: 9.0,
+                                  color: AppTheme.cardBackgroundColor(context),
+                                  shadowColor: Colors.grey.shade700,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(screenWidth * 0.04),
+                                  ),
+                                  child: TabBarView(
+                                    controller: tabController,
+                                    physics: ClampingScrollPhysics(),
+                                    children: [
+                                      SingleChildScrollView(child: Setting()),
+                                      SingleChildScrollView(child: Usersetting()),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),

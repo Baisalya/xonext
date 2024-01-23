@@ -20,13 +20,8 @@ class _SettingState extends State<Setting> {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
-    return Card(
-      elevation: 9.0,
-      color: AppTheme.cardBackgroundColor(context),
-      shadowColor: Colors.grey.shade700,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(screenWidth * 0.04),
-      ),
+    return Container(
+
       child: Padding(
         padding: EdgeInsets.all(screenWidth * 0.04),
         child: Column(

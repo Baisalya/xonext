@@ -14,13 +14,8 @@ class Usersetting extends StatelessWidget {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
 
-    return Card(
-      elevation: 9.0,
-      color: AppTheme.cardBackgroundColor(context),
-      shadowColor: Colors.grey.shade700,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15.0),
-      ),
+    return Container(
+
       child: Padding(
         padding: EdgeInsets.all(screenWidth * 0.03), // Adjust padding based on screen width
         child: Column(
