@@ -97,5 +97,10 @@ class AppTheme {
   static iconcolor(BuildContext context) =>
       Theme.of(context).brightness == Brightness.dark
           ? Colors.white60 // Set your dark mode background color here
-          : Colors.black87; // Set your light mode background color here
+          : Colors.black87;
+
+  static shadowcolor(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.dark
+          ? Colors.white // Set your dark mode background color here
+          : Colors.black87;// Set your light mode background color here
 }

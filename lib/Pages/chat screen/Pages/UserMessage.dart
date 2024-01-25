@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:xonext/utils/AppTheme.dart';
 
 import '../../../utils/Fontsize.dart';
 
@@ -16,10 +17,17 @@ class UserMessage extends StatelessWidget {
       children: [
         Container(
           margin: const EdgeInsets.only(right: 50.0, bottom: 10.0),
-          child: Card(
-            elevation: 5,
+          child:Card(
+            shadowColor: AppTheme.shadowcolor(context), // Set the shadow color
+
+            elevation: 10,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(10.0),
+                topRight: Radius.zero,
+                bottomLeft: Radius.circular(10.0),
+                bottomRight: Radius.circular(10.0), // Rectangular corner
+              ),
             ),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -53,6 +61,8 @@ class UserMessage extends StatelessWidget {
               ),
             ),
           ),
+
+
         ),
         Positioned(
           right: 0,
