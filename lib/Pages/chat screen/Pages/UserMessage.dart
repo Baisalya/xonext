@@ -18,6 +18,7 @@ class UserMessage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Card(
+            color: AppTheme.cardBackgroundColor(context),
             shadowColor: AppTheme.shadowcolor(context), // Set the shadow color
             elevation: 10,
             shape: RoundedRectangleBorder(
