@@ -17,65 +17,60 @@ class UserMessage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Stack(
-            children: [
-              Card(
-                shadowColor: AppTheme.shadowcolor(context), // Set the shadow color
-                elevation: 10,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(10.0),
-                    topRight: Radius.zero,
-                    bottomLeft: Radius.circular(10.0),
-                    bottomRight: Radius.circular(10.0), // Rectangular corner
+          Card(
+            shadowColor: AppTheme.shadowcolor(context), // Set the shadow color
+            elevation: 10,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(15.0),
+                topRight: Radius.zero,
+                bottomLeft: Radius.circular(15.0),
+                bottomRight: Radius.circular(15.0), // Rectangular corner
+              ),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(top: 8.0), // Add top margin here
+                  child: Row(
+                    children: [
+                      IconButton(
+                        icon: Icon(Icons.sync), // Replace with your first icon
+                        onPressed: () {
+                          // Add functionality for the first icon button
+                        },
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.delete_outlined), // Replace with your second icon
+                        onPressed: () {
+                          // Add functionality for the second icon button
+                        },
+                      ),
+                    ],
                   ),
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(top: 8.0), // Add top margin here
-                      child: Row(
-                        children: [
-                          IconButton(
-                            icon: Icon(Icons.access_alarm_sharp), // Replace with your first icon
-                            onPressed: () {
-                              // Add functionality for the first icon button
-                            },
-                          ),
-                          IconButton(
-                            icon: Icon(Icons.access_alarm_sharp), // Replace with your second icon
-                            onPressed: () {
-                              // Add functionality for the second icon button
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      constraints: BoxConstraints(
-                        maxWidth: MediaQuery.of(context).size.width * 0.8,
-                      ),
-                      padding: EdgeInsets.all(10.0),
-                      decoration: BoxDecoration(
-                        color: Colors.transparent,
-                      ),
-                      child: Text(
-                        text,
-                        style: TextStyle(fontSize: Provider.of<FontSizeNotifier>(context).fontSize),
-                      ),
-                    ),
-                  ],
+                Container(
+                  constraints: BoxConstraints(
+                    maxWidth: MediaQuery.of(context).size.width * 0.8,
+                  ),
+                  padding: EdgeInsets.all(10.0),
+                  decoration: BoxDecoration(
+                    color: Colors.transparent,
+                  ),
+                  child: Text(
+                    text,
+                    style: TextStyle(fontSize: Provider.of<FontSizeNotifier>(context).fontSize),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
+          SizedBox(width: 8.0,),
           CircleAvatar(
             backgroundColor: Colors.blue,
             child: Text('U', style: TextStyle(color: Colors.white)),
           ),
-
-          SizedBox(width: 8.0),
         ],
       ),
     );
