@@ -4,8 +4,84 @@ import 'package:xonext/utils/AppTheme.dart';
 
 import '../../../utils/Fontsize.dart';
 
+class UserMessage extends StatelessWidget {
+  final String text;
 
+  UserMessage({required this.text});
 
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 10.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Stack(
+            children: [
+              Card(
+                shadowColor: AppTheme.shadowcolor(context), // Set the shadow color
+                elevation: 10,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(10.0),
+                    topRight: Radius.zero,
+                    bottomLeft: Radius.circular(10.0),
+                    bottomRight: Radius.circular(10.0), // Rectangular corner
+                  ),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(top: 8.0), // Add top margin here
+                      child: Row(
+                        children: [
+                          IconButton(
+                            icon: Icon(Icons.access_alarm_sharp), // Replace with your first icon
+                            onPressed: () {
+                              // Add functionality for the first icon button
+                            },
+                          ),
+                          IconButton(
+                            icon: Icon(Icons.access_alarm_sharp), // Replace with your second icon
+                            onPressed: () {
+                              // Add functionality for the second icon button
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      constraints: BoxConstraints(
+                        maxWidth: MediaQuery.of(context).size.width * 0.7,
+                      ),
+                      padding: EdgeInsets.all(10.0),
+                      decoration: BoxDecoration(
+                        color: Colors.transparent,
+                      ),
+                      child: Text(
+                        text,
+                        style: TextStyle(fontSize: Provider.of<FontSizeNotifier>(context).fontSize),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          SizedBox(width: 8.0),
+          CircleAvatar(
+            radius: 20.0,
+            backgroundImage: AssetImage('assets/user_avatar.jpg'), // Replace with your avatar image
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/*
 class UserMessage extends StatelessWidget {
   final String text;
 
@@ -96,3 +172,4 @@ class UserMessage extends StatelessWidget {
     );
   }
 }
+*/
