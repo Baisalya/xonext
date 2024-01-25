@@ -15,7 +15,7 @@ class UserMessage extends StatelessWidget {
       margin: EdgeInsets.symmetric(vertical: 10.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Stack(
             children: [
@@ -54,7 +54,7 @@ class UserMessage extends StatelessWidget {
                     ),
                     Container(
                       constraints: BoxConstraints(
-                        maxWidth: MediaQuery.of(context).size.width * 0.7,
+                        maxWidth: MediaQuery.of(context).size.width * 0.8,
                       ),
                       padding: EdgeInsets.all(10.0),
                       decoration: BoxDecoration(
@@ -70,28 +70,31 @@ class UserMessage extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(width: 8.0),
           CircleAvatar(
-            radius: 20.0,
-            backgroundImage: AssetImage('assets/user_avatar.jpg'), // Replace with your avatar image
+            backgroundColor: Colors.blue,
+            child: Text('U', style: TextStyle(color: Colors.white)),
           ),
+
+          SizedBox(width: 8.0),
         ],
       ),
     );
   }
 }
 
+
 /*
-class UserMessage extends StatelessWidget {
+class UserMessages extends StatelessWidget {
   final String text;
 
-  UserMessage({required this.text});
+  UserMessages({required this.text});
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Container(
+        */
+/*Container(
           margin: const EdgeInsets.only(right: 50.0, bottom: 10.0),
           child:Card(
             shadowColor: AppTheme.shadowcolor(context), // Set the shadow color
@@ -139,6 +142,56 @@ class UserMessage extends StatelessWidget {
           ),
 
 
+        ),*//*
+
+        Card(
+          shadowColor: AppTheme.shadowcolor(context), // Set the shadow color
+          elevation: 10,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(10.0),
+              topRight: Radius.zero,
+              bottomLeft: Radius.circular(10.0),
+              bottomRight: Radius.circular(10.0), // Rectangular corner
+            ),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(top: 8.0), // Add top margin here
+                child: Row(
+                  children: [
+                    IconButton(
+                      icon: Icon(Icons.access_alarm_sharp), // Replace with your first icon
+                      onPressed: () {
+                        // Add functionality for the first icon button
+                      },
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.access_alarm_sharp), // Replace with your second icon
+                      onPressed: () {
+                        // Add functionality for the second icon button
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                constraints: BoxConstraints(
+                  maxWidth: MediaQuery.of(context).size.width * 0.8,
+                ),
+                padding: EdgeInsets.all(10.0),
+                decoration: BoxDecoration(
+                  color: Colors.transparent,
+                ),
+                child: Text(
+                  text,
+                  style: TextStyle(fontSize: Provider.of<FontSizeNotifier>(context).fontSize),
+                ),
+              ),
+            ],
+          ),
         ),
         Positioned(
           right: 0,
@@ -173,3 +226,4 @@ class UserMessage extends StatelessWidget {
   }
 }
 */
+
