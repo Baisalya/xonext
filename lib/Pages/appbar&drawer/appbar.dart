@@ -49,7 +49,7 @@ class CustomDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-
+    bool isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
     return Drawer(
       child: SafeArea(
         child: Container(
@@ -124,8 +124,7 @@ class CustomDrawer extends StatelessWidget {
                             ),
                             Expanded(
                               child: Container(
-                                height: screenHeight * 0.5,
-                                child: Card(
+                                height: isLandscape ? screenHeight * 0.7 : screenHeight * 0.5,                                child: Card(
                                   elevation: 9.0,
                                   color: AppTheme.cardBackgroundColor(context),
                                   shadowColor: Colors.grey.shade700,
