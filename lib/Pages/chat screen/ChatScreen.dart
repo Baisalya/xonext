@@ -34,7 +34,13 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
     });
     // Simulating bot reply after a delay
     Future.delayed(Duration(seconds: 2), () {
-      BotMessage botReply = BotMessage(text: 'This is a bot reply');  // Replace with actual bot reply
+      String bot="Hey there! 👋 How's your day going?"
+          " I hope it's been fantastic so far! By the way,"
+          " have you checked out the latest updates on Byanjan? "
+          "It's an incredible app designed to revolutionize "
+          "how you experience Searching and exploring new Knowledge. 🍳✨";
+
+      BotMessage botReply = BotMessage(text: bot);  // Replace with actual bot reply
 
       setState(() {
       //  _messages.insert(0, userMessage);  // Add user message to the list

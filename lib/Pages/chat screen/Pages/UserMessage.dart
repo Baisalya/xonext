@@ -18,7 +18,7 @@ class UserMessage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Card(
-            color: AppTheme.cardBackgroundColor(context),
+            color: AppTheme.cardBackgroundColor2(context),
             shadowColor: AppTheme.shadowcolor(context), // Set the shadow color
             elevation: 10,
             shape: RoundedRectangleBorder(
@@ -37,13 +37,13 @@ class UserMessage extends StatelessWidget {
                   child: Row(
                     children: [
                       IconButton(
-                        icon: Icon(Icons.sync), // Replace with your first icon
+                        icon: Icon(Icons.sync,color: AppTheme.iconcolor(context),), // Replace with your first icon
                         onPressed: () {
                           // Add functionality for the first icon button
                         },
                       ),
                       IconButton(
-                        icon: Icon(Icons.delete_outlined), // Replace with your second icon
+                        icon: Icon(Icons.delete_outlined,color: AppTheme.iconcolor(context),), // Replace with your second icon
                         onPressed: () {
                           // Add functionality for the second icon button
                         },

@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:xonext/utils/AppTheme.dart';
 
+import '../../../utils/Customized/Waveformprogressbar.dart';
 import '../../../utils/Fontsize.dart';
 
 class BotMessage extends StatelessWidget {
@@ -33,7 +34,7 @@ class BotMessage extends StatelessWidget {
               ),
               Expanded(
                 child: Card(
-                  color: Colors.transparent,
+                  color: Colors.white,
                   elevation: 0,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
@@ -43,7 +44,10 @@ class BotMessage extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text('Bot', style: Theme.of(context).textTheme.headline6),
+                        WaveformProgressBar(
+                  progress: 0.6, // Example progress value (0 to 1)
+                  totalBars: 30, barSpacing: 4, // Total number of bars in the waveform
+                     ),
                         Container(
                           margin: const EdgeInsets.only(top: 8.0),
                           child: Text(text,

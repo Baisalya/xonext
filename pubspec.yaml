@@ -29,6 +29,7 @@ dependencies:
   flutter_acrylic:
   dots_indicator:
   flutter_launcher_icons:
+  audioplayers:
 dev_dependencies:
   flutter_test:
     sdk: flutter

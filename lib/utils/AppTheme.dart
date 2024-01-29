@@ -58,7 +58,10 @@ class AppTheme {
       Theme.of(context).brightness == Brightness.dark
           ? Colors.white60 // Set your dark mode background color here
           : Colors.white; // Set your light mode background color here
-
+  static Color cardBackgroundColor2(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.dark
+          ? Colors.black87 // Set your dark mode background color here
+          : Colors.white; // Set your light mode background color here
   static Color borderColor(BuildContext context) =>
       Theme.of(context).brightness == Brightness.dark
           ? Colors.white // Border color in dark mode
