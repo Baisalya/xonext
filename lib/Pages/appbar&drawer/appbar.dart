@@ -16,7 +16,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     String appLogoPath=AppTheme.getAppLogo(context);
     return AppBar(
-      title: Image.asset(appLogoPath,height: 60,width: 55,fit: BoxFit.contain,),
+      title: Image.asset(appLogoPath,height: 55,width: 55,fit: BoxFit.contain,),
       centerTitle: true,
       backgroundColor: Colors.transparent, // Set background color to transparent
       elevation: 4, // Remove the shadow
