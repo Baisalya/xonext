@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:xonext/utils/AppTheme.dart';
-
+import 'package:xonext/utils/Customized/clickabletext.dart';
+import 'package:url_launcher/url_launcher.dart'; // Import this package to launch URLs
 import '../../../utils/Fontsize.dart';
 
 class UserMessage extends StatelessWidget {
@@ -60,9 +61,13 @@ class UserMessage extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: Colors.transparent,
                   ),
-                  child: Text(
-                    text,
+                  child: CustomText (
+
                     style: TextStyle(fontSize: Provider.of<FontSizeNotifier>(context).fontSize),
+                    text: text,
+                    onOpenUrl: (String url) {
+                      launch(url); // Open URL when tapped
+                    },
                   ),
                 ),
               ],
