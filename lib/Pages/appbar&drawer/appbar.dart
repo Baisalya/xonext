@@ -16,10 +16,18 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     String appLogoPath=AppTheme.getAppLogo(context);
     return AppBar(
+leading:  IconButton(
+  icon: Icon(CupertinoIcons.forward,size: 30,),
+  onPressed: () {
+    // Open the drawer when the IconButton is clicked
+    Scaffold.of(context).openDrawer();
+  },
+),
       title: Image.asset(appLogoPath,height: 55,width: 55,fit: BoxFit.contain,),
       centerTitle: true,
       backgroundColor: Colors.transparent, // Set background color to transparent
       elevation: 4, // Remove the shadow
+
 
       flexibleSpace: Container(
         decoration: const BoxDecoration(
