@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:xonext/utils/AppTheme.dart';
@@ -37,7 +38,7 @@ class UserMessage extends StatelessWidget {
                   child: Row(
                     children: [
                       IconButton(
-                        icon: Icon(Icons.sync,color: AppTheme.iconcolor(context),), // Replace with your first icon
+                        icon: Icon(CupertinoIcons.arrow_2_circlepath_circle,color: AppTheme.iconcolor(context),), // Replace with your first icon
                         onPressed: () {
                           // Add functionality for the first icon button
                         },

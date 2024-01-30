@@ -8,11 +8,13 @@ import 'drawertab/settings.dart';
 import 'drawertab/usersetting.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+  String appLogoPath="";
   @override
   Size get preferredSize => Size.fromHeight(60.0);
 
   @override
   Widget build(BuildContext context) {
+    String appLogoPath=AppTheme.getAppLogo(context);
     return AppBar(
       title: Text('BYANJAN',
       style:TextStyle(color: Colors.white) ,),
@@ -42,7 +44,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
 class CustomDrawer extends StatelessWidget {
   final TabController tabController;
-
+  String appLogoPath="";
   CustomDrawer({required this.tabController});
 
   @override
@@ -50,6 +52,8 @@ class CustomDrawer extends StatelessWidget {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     bool isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
+    appLogoPath=AppTheme.getAppLogo(context);
+
     return Drawer(
       child: SafeArea(
         child: Container(
@@ -62,7 +66,7 @@ class CustomDrawer extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     CircleAvatar(
-                      backgroundImage: AssetImage('assets/Applogo/applogo.png'),
+                      backgroundImage: AppTheme.appassetimage(context),
                       backgroundColor: AppTheme.backgroundColor(context),
                       radius: screenWidth * 0.05,
                     ),
@@ -110,9 +114,14 @@ class CustomDrawer extends StatelessWidget {
                                     RotatedBox(
                                       quarterTurns: 1,
                                       child: Tab(
-                                        icon: Image.asset('assets/Applogo/applogo.png', width: screenWidth * 0.09, height: screenWidth * 0.09),
+                                        icon: Image.asset(
+                                           appLogoPath,
+                                          width: screenWidth * 0.09,
+                                          height: screenWidth * 0.09,
+                                        ),
                                       ),
                                     ),
+
                                   ],
                                   indicatorSize: TabBarIndicatorSize.label,
                                   indicator: BoxDecoration(
@@ -124,7 +133,8 @@ class CustomDrawer extends StatelessWidget {
                             ),
                             Expanded(
                               child: Container(
-                                height: isLandscape ? screenHeight * 0.7 : screenHeight * 0.5,                                child: Card(
+                                height: isLandscape ? screenHeight * 0.7 : screenHeight * 0.5,
+                                child: Card(
                                   elevation: 9.0,
                                   color: AppTheme.cardBackgroundColor(context),
                                   shadowColor: Colors.grey.shade700,
@@ -133,7 +143,7 @@ class CustomDrawer extends StatelessWidget {
                                   ),
                                   child: TabBarView(
                                     controller: tabController,
-                                    physics: ClampingScrollPhysics(),
+                                    physics:NeverScrollableScrollPhysics(),
                                     children: [
                                       SingleChildScrollView(child: Setting()),
                                       SingleChildScrollView(child: Usersetting()),

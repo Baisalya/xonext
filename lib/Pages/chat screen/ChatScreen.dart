@@ -20,6 +20,7 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
   late TabController _tabController;
   late ScrollController _scrollController;
   bool showScrollToBottomIcon = false;
+  String appLogoPath="";
   void _handleSubmitted(String text) {
     // Check if the text is empty
     if (text.trim().isEmpty) {
@@ -67,6 +68,7 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+     appLogoPath = AppTheme.getAppLogo(context);
 
     return Scaffold(
       appBar: CustomAppBar(),
@@ -120,58 +122,76 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
   }
 
   Widget _buildTextComposer() {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-      decoration: BoxDecoration(
-        color: AppTheme.chatcomposer(context),
-        borderRadius: BorderRadius.circular(24.0),
-        border: Border.all(color: AppTheme.borderColor(context)),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.3),
-            spreadRadius: 2,
-            blurRadius: 5,
-            offset: Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Row(
-        children: <Widget>[
-          Container(
-            margin: EdgeInsets.all(8.0),
-            child: Image.asset(
-              'assets/Applogo/applogo.png',
-              fit: BoxFit.contain,
-              width: 45,
-              height: 45,
-            ),
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10.0),
-              child: TextField(
-                controller: _textController,
-                onSubmitted: _handleSubmitted,
-                decoration: InputDecoration(
-                  hintText: 'Send a message',
-                  border: InputBorder.none,
-                  contentPadding: EdgeInsets.symmetric(horizontal: 12.0),
+    return Row(
+      children: [
+        Expanded(
+          child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 8.0),
+            decoration: BoxDecoration(
+              color: AppTheme.chatcomposer(context),
+              borderRadius: BorderRadius.circular(24.0),
+              border: Border.all(color: AppTheme.borderColor(context)),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.3),
+                  spreadRadius: 2,
+                  blurRadius: 5,
+                  offset: Offset(0, 2),
                 ),
-              ),
+              ],
+            ),
+            child: Row(
+              children: <Widget>[
+                /*Container(
+                  margin: EdgeInsets.all(8.0),
+                  child: Image.asset(
+                    appLogoPath,
+                    fit: BoxFit.contain,
+                    width: 45,
+                    height: 45,
+                  ),
+                ),*/
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 1.0,horizontal: 5),
+                    child: SingleChildScrollView(
+                      child: TextField(
+                        maxLines: null,
+                        controller: _textController,
+                        onSubmitted: _handleSubmitted,
+                        decoration: InputDecoration(
+                          hintText: 'Send a message',
+                          border: InputBorder.none,
+                          contentPadding: EdgeInsets.symmetric(horizontal: 12.0),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+
+                IconButton(
+                  icon: Icon(Icons.translate, color: AppTheme.iconcolor(context)),
+                  onPressed: () {
+                    // Add your logic for the attach button here
+                  },
+                ),
+                IconButton(
+                  icon: Icon(Icons.send, color: AppTheme.iconcolor(context)),
+                  onPressed: () => _handleSubmitted(_textController.text),
+                ),
+              ],
             ),
           ),
-          IconButton(
-            icon: Icon(FontAwesomeIcons.language, color: AppTheme.iconcolor(context)),
-            onPressed: () {
-              // Add your logic for the attach button here
-            },
-          ),
-          IconButton(
-            icon: Icon(Icons.send, color: AppTheme.iconcolor(context)),
-            onPressed: () => _handleSubmitted(_textController.text),
-          ),
-        ],
-      ),
+        ),
+        IconButton(
+          icon:
+
+          Icon(Icons.keyboard_voice,), // Example icon
+          onPressed: () {
+            // Add your logic for the icon button here
+          },
+        ),
+      ],
     );
   }
 }

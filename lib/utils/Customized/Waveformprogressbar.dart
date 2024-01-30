@@ -25,15 +25,18 @@ class _WaveformProgressBarState extends State<WaveformProgressBar> {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
+      mainAxisSize: MainAxisSize.max,
       children: [
-        IconButton(
-          icon: Icon(_isPlaying ? Icons.pause : Icons.play_arrow),
-          onPressed: () {
-            setState(() {
-              _isPlaying = !_isPlaying;
-            });
-          },
+        Container(
+          child: IconButton(
+           iconSize: 29,
+            icon: Icon(_isPlaying ? Icons.pause : Icons.play_arrow),
+            onPressed: () {
+              setState(() {
+                _isPlaying = !_isPlaying;
+              });
+            },
+          ),
         ),
         CustomPaint(
           size: Size(200, 30), // Size of the waveform progress bar

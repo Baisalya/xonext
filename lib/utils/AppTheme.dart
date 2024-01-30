@@ -43,6 +43,20 @@ class AppTheme {
     color: warningErrorTextColor,
     fontSize: 16.0,
   );
+  //icon
+  static Image appimage(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.dark
+          ? Image.asset("assets/Applogo/byanzene_dark.png")// Set your dark mode background color here
+          : Image.asset("assets/Applogo/byanzene_dark.png"); // Set your light mode background color here
+  static AssetImage appassetimage(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.dark
+          ? AssetImage("assets/Applogo/byanzene_light.png")// Set your dark mode background color here
+          : AssetImage("assets/Applogo/byanzene_dark.png");
+  static String getAppLogo(BuildContext context) {
+    return Theme.of(context).brightness == Brightness.dark
+        ? "assets/Applogo/byanzene_light.png"
+        : "assets/Applogo/byanzene_dark.png";
+  }
   //day and night
   static Color appbarbackground(BuildContext context) =>
       Theme.of(context).brightness == Brightness.dark
@@ -94,8 +108,8 @@ class AppTheme {
 
   static boticonbackgroud(BuildContext context) =>
       Theme.of(context).brightness == Brightness.dark
-          ? Colors.white // Border color in dark mode
-          : Colors.black;
+          ? Colors.black87 // Border color in dark mode
+          : Colors.white60;
 
   static iconcolor(BuildContext context) =>
       Theme.of(context).brightness == Brightness.dark

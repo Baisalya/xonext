@@ -26,15 +26,15 @@ class BotMessage extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 8.0, right: 16.0),
                 child: CircleAvatar(
                   backgroundColor: AppTheme.boticonbackgroud(context),
-                  child: Theme.of(context).brightness == Brightness.dark
-                      ? Image.asset('assets/Applogo/mo_chatbot_dark.png', width: 34, height: 34,)
-                      : Image.asset('assets/Applogo/mo_chatbot_light.png', width: 34, height: 34,),
+                  child:Image.asset(
+                      AppTheme.getAppLogo(context),width: 34,height: 34,)
+
                 )
                 ,
               ),
               Expanded(
                 child: Card(
-                  color: Colors.white,
+                  color: Colors.transparent,
                   elevation: 0,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
@@ -46,7 +46,7 @@ class BotMessage extends StatelessWidget {
                       children: <Widget>[
                         WaveformProgressBar(
                   progress: 0.6, // Example progress value (0 to 1)
-                  totalBars: 30, barSpacing: 4, // Total number of bars in the waveform
+                  totalBars: 24, barSpacing: 6, // Total number of bars in the waveform
                      ),
                         Container(
                           margin: const EdgeInsets.only(top: 8.0),
