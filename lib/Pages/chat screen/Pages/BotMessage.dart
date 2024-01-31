@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:xonext/utils/AppTheme.dart';
 
 import '../../../utils/Customized/Waveformprogressbar.dart';
+import '../../../utils/Customized/clickabletext.dart';
 import '../../../utils/Fontsize.dart';
 
 class BotMessage extends StatelessWidget {
@@ -50,7 +51,8 @@ class BotMessage extends StatelessWidget {
                      ),
                         Container(
                           margin: const EdgeInsets.only(top: 8.0),
-                          child: Text(text,
+                          child: CustomText(text:
+                            text,
                             style:TextStyle(fontSize: Provider.of<FontSizeNotifier>(context).fontSize),                           ),
                         ),
                       ],

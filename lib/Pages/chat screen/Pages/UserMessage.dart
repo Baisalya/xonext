@@ -38,6 +38,7 @@ class UserMessage extends StatelessWidget {
                   padding: EdgeInsets.only(top: 8.0), // Add top margin here
                   child: Row(
                     children: [
+                      SizedBox(width: 50,),
                       IconButton(
                         icon: Icon(CupertinoIcons.arrow_2_circlepath_circle,color: AppTheme.iconcolor(context),), // Replace with your first icon
                         onPressed: () {
@@ -50,6 +51,7 @@ class UserMessage extends StatelessWidget {
                           // Add functionality for the second icon button
                         },
                       ),
+
                     ],
                   ),
                 ),
@@ -57,7 +59,7 @@ class UserMessage extends StatelessWidget {
                   constraints: BoxConstraints(
                     maxWidth: MediaQuery.of(context).size.width * 0.8,
                   ),
-                  padding: EdgeInsets.all(10.0),
+                  padding: EdgeInsets.fromLTRB(11, 4, 16, 16),
                   decoration: BoxDecoration(
                     color: Colors.transparent,
                   ),
