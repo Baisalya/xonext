@@ -1,8 +1,5 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
-
 class CustomText extends StatelessWidget {
   final String text;
   final TextStyle? style;

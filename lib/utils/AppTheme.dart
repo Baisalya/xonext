@@ -120,4 +120,27 @@ class AppTheme {
       Theme.of(context).brightness == Brightness.dark
           ? Colors.white // Set your dark mode background color here
           : Colors.black87;// Set your light mode background color here
+
+////code snippet
+  static Color codeColor(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.dark
+          ? Colors.white
+          : Colors.black; // Set your light mode text color here
+
+  static Color snippetColor(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.dark
+          ? Color(0xFF1E1E1E)
+          : Color(0xFFF5F5F5); // Set your light mode snippet background color here
+
+  static Color titleHeader(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.dark
+          ? Colors.blueGrey
+          : Colors.grey; // Set your light mode title header color here
+
+  static Color titleText(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.dark
+          ? Colors.white
+          : Colors.black87; // Set your light mode title text color here
+
+///
 }
