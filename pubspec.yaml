@@ -32,6 +32,7 @@ dependencies:
   audioplayers:
   url_launcher:
   string_similarity:
+  http:
 dev_dependencies:
   flutter_test:
     sdk: flutter

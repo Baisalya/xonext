@@ -79,18 +79,16 @@ class ProductSuggestionsGrid extends StatelessWidget {
       appBar: AppBar(
         title: Text('Product Suggestions'),
       ),
-      body: GridView.builder(
+      body: GridView.count(
         padding: EdgeInsets.all(10.0),
-        itemCount: products.length,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 10.0,
-          mainAxisSpacing: 10.0,
-        ),
-        itemBuilder: (context, index) {
-          return ProductSuggestion(text: products[index]);
-        },
+        crossAxisCount: 2,
+        crossAxisSpacing: 10.0,
+        mainAxisSpacing: 10.0,
+        children: products.map((product) {
+          return ProductSuggestion(text: product);
+        }).toList(),
       ),
     );
   }
 }
+

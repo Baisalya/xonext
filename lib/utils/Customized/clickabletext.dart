@@ -5,7 +5,7 @@ class CustomText extends StatelessWidget {
   final TextStyle? style;
   final Function(String)? onOpenUrl;
 
-  const CustomText({
+  const  CustomText({
     Key? key,
     required this.text,
     this.style,

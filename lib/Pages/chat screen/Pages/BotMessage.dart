@@ -10,7 +10,7 @@ import 'veritybotresponse/CodeSnippet.dart';
 import 'veritybotresponse/DefaultTextUI.dart';
 import 'veritybotresponse/ProductSuggestion.dart';
 
-import 'package:flutter/material.dart';
+
 
 class BotMessage extends StatelessWidget {
   final String text;
@@ -122,6 +122,7 @@ class BotMessage extends StatelessWidget {
     );
   }
 }
+
 
 
 
