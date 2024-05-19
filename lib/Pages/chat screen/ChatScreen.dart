@@ -9,6 +9,7 @@ import '../../Controller/chat_controller.dart';
 import '../../utils/Customized/blurredcircular.dart';
 import '../appbar&drawer/appbar.dart';
 import 'Pages/BotMessage.dart';
+import 'Pages/Message.dart';
 import 'Pages/UserMessage.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
@@ -24,7 +25,7 @@ class ChatScreen extends StatefulWidget {
 
 class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
   final TextEditingController _textController = TextEditingController();
-  final List<Widget> _messages = <Widget>[];
+  final List<Widget> _messages = <Widget>[]; // Use Widget type to support different message types
   late TabController _tabController;
   late ScrollController _scrollController;
   bool showScrollToBottomIcon = false;
@@ -32,28 +33,46 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
   final ChatController _chatController = ChatController();
 
   void _handleSubmitted(String text) {
-    // Check if the text is empty
     if (text.trim().isEmpty) {
-      return; // Do nothing if the text is empty
+      return;
     }
     _textController.clear();
 
-    // User message
     UserMessage userMessage = UserMessage(text: text);
     setState(() {
-      _messages.insert(0, userMessage);  // Add user message to the list immediately
+      _messages.insert(0, userMessage);
+      _messages.insert(0, LoadingMessage()); // Add loading indicator
     });
 
-    // Send the query to the bot and handle the response
     _chatController.sendMessage(text, (response) {
-      BotMessage botMessage = BotMessage(text: response);
       setState(() {
-        _messages.insert(0, botMessage);  // Add bot reply to the list
+        _messages.removeAt(0); // Remove the loading indicator
+
+        // Check if the response is an error
+        if (isErrorMessage(response)) {
+          BotMessage errorMessage = BotMessage(text: response, isError: true);
+          _messages.insert(0, errorMessage);
+        } else {
+          BotMessage botMessage = BotMessage(text: response);
+          _messages.insert(0, botMessage);
+        }
       });
     }).catchError((error) {
-      print("Error sending message: $error");
+      setState(() {
+        _messages.removeAt(0); // Remove the loading indicator
+        BotMessage errorMessage = BotMessage(text: "Error: $error", isError: true);
+        _messages.insert(0, errorMessage);
+      });
     });
   }
+
+// Function to check if a response is an error message
+  bool isErrorMessage(String response) {
+    // You can define your logic to determine if the response is an error
+    // For example, you might check if the response contains certain keywords
+    return response.toLowerCase().contains("error");
+  }
+
 
   @override
   void initState() {
@@ -63,8 +82,7 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
 
     _scrollController.addListener(() {
       setState(() {
-        // Check if scrolling is needed
-        showScrollToBottomIcon = _scrollController.position.pixels > 100; // Adjust threshold as needed
+        showScrollToBottomIcon = _scrollController.position.pixels > 100;
       });
     });
   }
@@ -85,7 +103,7 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
               children: <Widget>[
                 Flexible(
                   child: ListView.builder(
-                    controller: _scrollController, // Attach the controller to the ListView
+                    controller: _scrollController,
                     padding: EdgeInsets.all(8.0),
                     reverse: true,
                     itemCount: _messages.length,
@@ -132,8 +150,8 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
             Expanded(
               child: Container(
                 constraints: BoxConstraints(
-                  minHeight: 50, // Minimum height for the container
-                  maxHeight: 200, // Maximum height for the container
+                  minHeight: 50,
+                  maxHeight: 200,
                 ),
                 margin: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 8.0),
                 decoration: BoxDecoration(
@@ -187,7 +205,7 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
               ),
             ),
             IconButton(
-              icon: Icon(Icons.keyboard_voice,), // Example icon
+              icon: Icon(Icons.keyboard_voice), // Example icon
               onPressed: () {
                 // Add your logic for the icon button here
               },
@@ -198,6 +216,7 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
     );
   }
 }
+
 
 
 

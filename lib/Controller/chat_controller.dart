@@ -4,6 +4,10 @@ import 'package:uuid/uuid.dart';
 import '../Config/Config.dart';
 
 
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'package:uuid/uuid.dart';
+
 class ChatController {
   Future<void> sendMessage(String query, Function(String) onResponse) async {
     final String uid = Uuid().v4();
@@ -28,7 +32,7 @@ class ChatController {
           },
           "components": []
         }),
-      );
+      ).timeout(const Duration(seconds: 30));
 
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
@@ -51,7 +55,7 @@ class ChatController {
     try {
       final response = await http.get(url, headers: {
         'Authorization': 'Bearer ${Config.token}',
-      });
+      }).timeout(const Duration(seconds: 30));
 
       if (response.statusCode == 200) {
         final responseBody = response.body;
@@ -65,3 +69,4 @@ class ChatController {
     }
   }
 }
+
