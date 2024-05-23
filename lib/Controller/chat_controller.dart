@@ -2,14 +2,14 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:uuid/uuid.dart';
 import '../Config/Config.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ChatController {
   Future<void> sendMessage(String query, Function(String) onResponse) async {
     final String uid = Uuid().v4();
     print('Generated UUID: $uid'); // Print the generated UUID
     final url = Uri.parse('${Config.baseUrl}/chat/init_response_stream');
-
+    print('Query: $query'); // Print the query
     try {
       final response = await http.post(
         url,
@@ -56,8 +56,13 @@ class ChatController {
 
       if (response.statusCode == 200) {
         final responseBody = response.body;
-        onResponse(responseBody);
-        print(responseBody);
+        String finalResponse = _extractFinalResponse(responseBody);
+        if (finalResponse.isNotEmpty) {
+          onResponse(finalResponse);
+        } else {
+          onResponse("Error: Failed to parse response");
+        }
+        print(finalResponse);
       } else {
         throw Exception("Failed to fetch chat response: ${response.statusCode}");
       }
@@ -65,5 +70,30 @@ class ChatController {
       print("Error: $e");
       rethrow;
     }
+  }
+
+  String _extractFinalResponse(String response) {
+    final regex = RegExp(r'data: \[final-res\](.*)');
+    final matches = regex.allMatches(response);
+
+    for (var match in matches) {
+      if (match.groupCount > 0) {
+        return match.group(1)!.trim();
+      }
+    }
+    return "";
+  }
+
+  Future<void> saveMessages(List<Map<String, String>> messages) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> messagesList = messages.map((message) => jsonEncode(message)).toList();
+    await prefs.setStringList('chat_messages', messagesList);
+  }
+
+  Future<List<Map<String, String>>> loadMessages() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String>? messagesList = prefs.getStringList('chat_messages');
+    if (messagesList == null) return [];
+    return messagesList.map((message) => Map<String, String>.from(jsonDecode(message))).toList();
   }
 }

@@ -248,6 +248,13 @@ import 'package:flutter/services.dart'; // For Clipboard
 import 'package:provider/provider.dart'; // For FontSizeNotifier
 import 'package:flutter_html/flutter_html.dart'; // To render HTML
 
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_html/flutter_html.dart';
+import 'package:provider/provider.dart';
+import '../../../../utils/AppTheme.dart';
+import '../../../../utils/Fontsize.dart';
+
 class BotMessage extends StatelessWidget {
   final String text;
   final bool isError;
@@ -292,16 +299,10 @@ class BotMessage extends StatelessWidget {
                             child: Icon(Icons.error, color: Colors.red, size: 24),
                           )
                         else
-                          WaveformProgressBar(
-                            progress: 0.6, // Example progress value (0 to 1)
-                            totalBars: 24,
-                            barSpacing: 6,
-                          ),
-                        ...parts.map((part) {
-                          if (part.isCode) {
-                            return CodeSnippet(htmlText: part.text);
-                          } else {
-                            return Html(
+                          ...parts.map((part) {
+                            return part.isCode
+                                ? CodeSnippet(htmlText: part.text)
+                                : Html(
                               data: part.text,
                               style: {
                                 'body': Style(
@@ -310,8 +311,7 @@ class BotMessage extends StatelessWidget {
                                 ),
                               },
                             );
-                          }
-                        }).toList(),
+                          }).toList(),
                       ],
                     ),
                   ),
@@ -390,6 +390,7 @@ class _TextPart {
 
   _TextPart(this.text, {required this.isCode});
 }
+
 
 
 

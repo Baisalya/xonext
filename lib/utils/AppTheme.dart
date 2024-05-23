@@ -141,6 +141,9 @@ class AppTheme {
       Theme.of(context).brightness == Brightness.dark
           ? Colors.white
           : Colors.black87; // Set your light mode title text color here
+  static bool isDarkMode(BuildContext context) {
+    return Theme.of(context).brightness == Brightness.dark;
+  }
 
 ///
 }

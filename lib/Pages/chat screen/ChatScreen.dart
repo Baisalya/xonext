@@ -27,47 +27,6 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
   String appLogoPath = "";
   final ChatController _chatController = ChatController();
 
-  void _handleSubmitted(String text) {
-    if (text.trim().isEmpty) {
-      return;
-    }
-    _textController.clear();
-
-    UserMessage userMessage = UserMessage(text: text);
-    setState(() {
-      _messages.insert(0, userMessage);
-      _messages.insert(0, LoadingMessage()); // Add loading indicator
-    });
-
-    _chatController.sendMessage(text, (response) {
-      setState(() {
-        _messages.removeAt(0); // Remove the loading indicator
-
-        // Check if the response is an error
-        if (isErrorMessage(response)) {
-          BotMessage errorMessage = BotMessage(text: response, isError: true);
-          _messages.insert(0, errorMessage);
-        } else {
-          BotMessage botMessage = BotMessage(text: response);
-          _messages.insert(0, botMessage);
-        }
-      });
-    }).catchError((error) {
-      setState(() {
-        _messages.removeAt(0); // Remove the loading indicator
-        BotMessage errorMessage = BotMessage(text: "Error: $error", isError: true);
-        _messages.insert(0, errorMessage);
-      });
-    });
-  }
-
-  // Function to check if a response is an error message
-  bool isErrorMessage(String response) {
-    // You can define your logic to determine if the response is an error
-    // For example, you might check if the response contains certain keywords
-    return response.toLowerCase().contains("error");
-  }
-
   @override
   void initState() {
     super.initState();
@@ -79,6 +38,77 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
         showScrollToBottomIcon = _scrollController.position.pixels > 100;
       });
     });
+
+    _loadMessages();
+  }
+
+  void _loadMessages() async {
+    List<Map<String, String>> messages = await _chatController.loadMessages();
+    setState(() {
+      _messages.clear(); // Clear existing messages
+      for (int i = 0; i < messages.length; i++) {
+        var message = messages[i];
+        if (message['type'] == 'user') {
+          _messages.add(UserMessage(text: message['text']!));
+        } else {
+          _messages.add(BotMessage(text: message['text']!));
+        }
+      }
+    });
+  }
+
+
+  void _handleSubmitted(String text) {
+    if (text.trim().isEmpty) {
+      return;
+    }
+    _textController.clear();
+
+    UserMessage userMessage = UserMessage(text: text);
+    setState(() {
+      _messages.add(userMessage);
+      _messages.add(LoadingMessage()); // Add loading indicator
+    });
+
+    _chatController.sendMessage(text, (response) {
+      setState(() {
+        _messages.removeLast(); // Remove the loading indicator
+        BotMessage botMessage = isErrorMessage(response)
+            ? BotMessage(text: response, isError: true)
+            : BotMessage(text: response);
+        _messages.add(botMessage);
+        _saveMessages();
+      });
+    }).catchError((error) {
+      setState(() {
+        _messages.removeLast(); // Remove the loading indicator
+        BotMessage errorMessage = BotMessage(text: "Error: $error", isError: true);
+        _messages.add(errorMessage);
+        _saveMessages();
+      });
+    });
+
+    _saveMessages();
+  }
+
+
+  void _saveMessages() async {
+    List<Map<String, String>> messages = [];
+    for (var message in _messages) {
+      if (message is UserMessage) {
+        messages.add({'type': 'user', 'text': message.text});
+      } else if (message is BotMessage) {
+        messages.add({'type': 'bot', 'text': message.text});
+      }
+    }
+    await _chatController.saveMessages(messages);
+  }
+
+  // Function to check if a response is an error message
+  bool isErrorMessage(String response) {
+    // You can define your logic to determine if the response is an error
+    // For example, you might check if the response contains certain keywords
+    return response.toLowerCase().contains("error");
   }
 
   @override
@@ -99,7 +129,7 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
                   child: ListView.builder(
                     controller: _scrollController,
                     padding: EdgeInsets.all(8.0),
-                    reverse: true,
+                    reverse: false, // Ensure messages are not reversed
                     itemCount: _messages.length,
                     itemBuilder: (_, int index) => _messages[index],
                   ),
@@ -120,7 +150,7 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
               child: IconButton(
                 onPressed: () {
                   _scrollController.animateTo(
-                    0.0,
+                    _scrollController.position.maxScrollExtent,
                     duration: Duration(milliseconds: 500),
                     curve: Curves.easeInOut,
                   );
@@ -135,6 +165,7 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
       ),
     );
   }
+
 
   Widget _buildTextComposer() {
     return LayoutBuilder(
@@ -210,6 +241,7 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
     );
   }
 }
+
 
 
 
