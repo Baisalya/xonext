@@ -122,7 +122,11 @@ import 'veritybotresponse/ProductSuggestion.dart';
     );
   }
 }*/
-class BotMessage extends StatelessWidget {
+
+import 'package:flutter_html/flutter_html.dart';
+
+//html
+/*class BotMessage extends StatelessWidget {
   final String text;
   final bool isError;
 
@@ -134,7 +138,7 @@ class BotMessage extends StatelessWidget {
       // Display code snippet
       return CodeSnippet(title: "Code Snippet", text: text);
     } else {
-      // Display regular message
+      // Display HTML content
       return Container(
         margin: const EdgeInsets.symmetric(vertical: 10.0),
         color: Colors.transparent,
@@ -176,16 +180,8 @@ class BotMessage extends StatelessWidget {
                           ),
                           Container(
                             margin: const EdgeInsets.only(top: 8.0),
-                            child: Text(
-                              text,
-                              style: TextStyle(
-                                fontSize: Provider.of<FontSizeNotifier>(context).fontSize,
-                                color: isError ? Colors.red : null,
-                              ),
-                            ),
+                            child: Html(data: text), // Render HTML content
                           ),
-
-
                         ],
                       ),
                     ),
@@ -201,8 +197,7 @@ class BotMessage extends StatelessWidget {
                   IconButton(
                     icon: Icon(Icons.copy_all),
                     onPressed: () {
-                      // Add your functionality for the copy button
-                      _copyToClipboard(text, context);
+                      _copyToClipboard(text, context); // Call copy function
                     },
                     tooltip: 'Copy',
                   ),
@@ -244,7 +239,162 @@ class BotMessage extends StatelessWidget {
     // For simplicity, let's assume code snippets are enclosed in backticks (`) or triple backticks (```)
     return text.contains('`') || text.contains('```');
   }
+}*/
+
+
+
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart'; // For Clipboard
+import 'package:provider/provider.dart'; // For FontSizeNotifier
+import 'package:flutter_html/flutter_html.dart'; // To render HTML
+
+class BotMessage extends StatelessWidget {
+  final String text;
+  final bool isError;
+
+  BotMessage({required this.text, this.isError = false});
+
+  @override
+  Widget build(BuildContext context) {
+    final parts = _parseText(text);
+
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 10.0),
+      color: Colors.transparent,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0, right: 16.0),
+                child: CircleAvatar(
+                  backgroundColor: isError ? Colors.red : AppTheme.boticonbackgroud(context),
+                  child: Image.asset(AppTheme.getAppLogo(context), width: 34, height: 34),
+                ),
+              ),
+              Expanded(
+                child: Card(
+                  color: Colors.transparent,
+                  elevation: 0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        if (isError)
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 8.0),
+                            child: Icon(Icons.error, color: Colors.red, size: 24),
+                          )
+                        else
+                          WaveformProgressBar(
+                            progress: 0.6, // Example progress value (0 to 1)
+                            totalBars: 24,
+                            barSpacing: 6,
+                          ),
+                        ...parts.map((part) {
+                          if (part.isCode) {
+                            return CodeSnippet(htmlText: part.text);
+                          } else {
+                            return Html(
+                              data: part.text,
+                              style: {
+                                'body': Style(
+                                  fontSize: FontSize(Provider.of<FontSizeNotifier>(context).fontSize),
+                                  color: isError ? Colors.red : null,
+                                ),
+                              },
+                            );
+                          }
+                        }).toList(),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 16.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                IconButton(
+                  icon: Icon(Icons.copy_all),
+                  onPressed: () {
+                    _copyToClipboard(text, context);
+                  },
+                  tooltip: 'Copy',
+                ),
+                IconButton(
+                  icon: Icon(Icons.thumb_up_alt_outlined),
+                  selectedIcon: Icon(Icons.thumb_up_off_alt_rounded),
+                  onPressed: () {
+                    // Add your functionality for the like button
+                  },
+                  tooltip: 'Like',
+                ),
+                IconButton(
+                  icon: Icon(Icons.thumb_down_alt_outlined),
+                  selectedIcon: Icon(Icons.thumb_down_alt_rounded),
+                  onPressed: () {
+                    // Add your functionality for the dislike button
+                  },
+                  tooltip: 'Dislike',
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _copyToClipboard(String text, BuildContext context) {
+    Clipboard.setData(ClipboardData(text: text));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Text copied to clipboard')),
+    );
+  }
+
+  List<_TextPart> _parseText(String text) {
+    final parts = <_TextPart>[];
+    final RegExp codeSnippetRegex = RegExp(r'(```[\s\S]*?```|`[^`]*`)');
+    final matches = codeSnippetRegex.allMatches(text);
+
+    int currentIndex = 0;
+    for (final match in matches) {
+      if (match.start > currentIndex) {
+        parts.add(_TextPart(text.substring(currentIndex, match.start), isCode: false));
+      }
+      parts.add(_TextPart(match.group(0)!, isCode: true));
+      currentIndex = match.end;
+    }
+
+    if (currentIndex < text.length) {
+      parts.add(_TextPart(text.substring(currentIndex), isCode: false));
+    }
+
+    return parts;
+  }
 }
+
+class _TextPart {
+  final String text;
+  final bool isCode;
+
+  _TextPart(this.text, {required this.isCode});
+}
+
+
+
+
+
 
 
 

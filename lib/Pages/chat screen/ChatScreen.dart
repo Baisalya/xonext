@@ -11,12 +11,7 @@ import '../appbar&drawer/appbar.dart';
 import 'Pages/BotMessage.dart';
 import 'Pages/Message.dart';
 import 'Pages/UserMessage.dart';
-import 'package:flutter/material.dart';
-import 'package:uuid/uuid.dart';
 
-import 'package:flutter/material.dart';
-
-import 'package:uuid/uuid.dart';
 
 class ChatScreen extends StatefulWidget {
   @override
@@ -66,13 +61,12 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
     });
   }
 
-// Function to check if a response is an error message
+  // Function to check if a response is an error message
   bool isErrorMessage(String response) {
     // You can define your logic to determine if the response is an error
     // For example, you might check if the response contains certain keywords
     return response.toLowerCase().contains("error");
   }
-
 
   @override
   void initState() {
@@ -216,6 +210,7 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
     );
   }
 }
+
 
 
 

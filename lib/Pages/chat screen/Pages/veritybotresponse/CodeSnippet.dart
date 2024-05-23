@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
+import 'package:provider/provider.dart';
 import '../../../../utils/AppTheme.dart';
-
+import '../../../../utils/Fontsize.dart';
 
 class CodeSnippet extends StatelessWidget {
-  final String title;
-  final String text;
+  final String htmlText;
 
-  const CodeSnippet({Key? key, required this.title, required this.text})
-      : super(key: key);
+  const CodeSnippet({Key? key, required this.htmlText}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class CodeSnippet extends StatelessWidget {
             ),
           ),
           child: Text(
-            title,
+            "Code Snippet",
             style: TextStyle(
               fontSize: 18.0,
               fontWeight: FontWeight.bold,
@@ -49,21 +49,25 @@ class CodeSnippet extends StatelessWidget {
               ),
             ],
           ),
-          child: Material(
-            color: Colors.transparent,
-            child: Text(
-              text,
-              style: TextStyle(
+          child: Html(
+            data: htmlText.replaceAll('```', '').replaceAll('`', ''), // Clean up the backticks
+            style: {
+              'pre': Style(
                 fontFamily: 'RobotoMono',
-                fontSize: 16.0,
+                fontSize: FontSize(Provider.of<FontSizeNotifier>(context).fontSize),
                 letterSpacing: -0.5,
                 color: AppTheme.codeColor(context),
               ),
-            ),
+              'code': Style(
+                fontFamily: 'RobotoMono',
+                fontSize: FontSize(Provider.of<FontSizeNotifier>(context).fontSize),
+                letterSpacing: -0.5,
+                color: AppTheme.codeColor(context),
+              ),
+            },
           ),
         ),
       ],
     );
   }
 }
-

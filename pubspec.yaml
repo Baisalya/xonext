@@ -33,6 +33,7 @@ dependencies:
   url_launcher:
   string_similarity:
   http:
+  flutter_html:
 dev_dependencies:
   flutter_test:
     sdk: flutter
