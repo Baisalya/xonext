@@ -243,17 +243,6 @@ import 'package:flutter_html/flutter_html.dart';
 
 
 
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart'; // For Clipboard
-import 'package:provider/provider.dart'; // For FontSizeNotifier
-import 'package:flutter_html/flutter_html.dart'; // To render HTML
-
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_html/flutter_html.dart';
-import 'package:provider/provider.dart';
-import '../../../../utils/AppTheme.dart';
-import '../../../../utils/Fontsize.dart';
 
 class BotMessage extends StatelessWidget {
   final String text;
@@ -300,17 +289,20 @@ class BotMessage extends StatelessWidget {
                           )
                         else
                           ...parts.map((part) {
-                            return part.isCode
-                                ? CodeSnippet(htmlText: part.text)
-                                : Html(
-                              data: part.text,
-                              style: {
-                                'body': Style(
-                                  fontSize: FontSize(Provider.of<FontSizeNotifier>(context).fontSize),
-                                  color: isError ? Colors.red : null,
-                                ),
-                              },
-                            );
+                            if (part.isCode) {
+                              final language = _detectLanguage(part.text);
+                              return CodeSnippet(htmlText: part.text, language: language);
+                            } else {
+                              return Html(
+                                data: part.text,
+                                style: {
+                                  'body': Style(
+                                    fontSize: FontSize(Provider.of<FontSizeNotifier>(context).fontSize),
+                                    color: isError ? Colors.red : null,
+                                  ),
+                                },
+                              );
+                            }
                           }).toList(),
                       ],
                     ),
@@ -382,6 +374,19 @@ class BotMessage extends StatelessWidget {
 
     return parts;
   }
+
+  String _detectLanguage(String text) {
+    // Simple heuristic to detect language, you can use more advanced techniques or libraries.
+    if (text.contains('public class') || text.contains('System.out.println')) {
+      return 'java';
+    } else if (text.contains('def ') || text.contains('print(')) {
+      return 'python';
+    } else if (text.contains('function') || text.contains('console.log')) {
+      return 'javascript';
+    }
+    // Add more language detection as needed
+    return 'plaintext';
+  }
 }
 
 class _TextPart {
@@ -390,6 +395,7 @@ class _TextPart {
 
   _TextPart(this.text, {required this.isCode});
 }
+
 
 
 

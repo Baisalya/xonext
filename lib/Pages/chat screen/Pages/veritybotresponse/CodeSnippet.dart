@@ -6,14 +6,18 @@ import 'package:provider/provider.dart';
 import '../../../../utils/AppTheme.dart';
 import '../../../../utils/Fontsize.dart';
 
+
+
+
+
 class CodeSnippet extends StatelessWidget {
   final String htmlText;
+  final String language;
 
-  const CodeSnippet({Key? key, required this.htmlText}) : super(key: key);
+  const CodeSnippet({Key? key, required this.htmlText, required this.language}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // Extracting the code from the htmlText if necessary
     String code = _extractCodeFromHtml(htmlText);
 
     return Column(
@@ -71,7 +75,7 @@ class CodeSnippet extends StatelessWidget {
             ),
             child: HighlightView(
               code,
-              language: 'dart', // Specify the language of the code
+              language: language, // Use the language parameter
               theme: githubTheme, // You can choose different themes
               padding: const EdgeInsets.all(12.0),
               textStyle: TextStyle(
@@ -87,7 +91,11 @@ class CodeSnippet extends StatelessWidget {
   }
 
   String _extractCodeFromHtml(String htmlText) {
-    // Example of simple code extraction, may need improvements based on actual HTML structure
+    RegExp exp = RegExp(r'<pre><code>([\s\S]*?)</code></pre>');
+    var match = exp.firstMatch(htmlText);
+    if (match != null) {
+      return match.group(1)?.replaceAll('&lt;', '<').replaceAll('&gt;', '>').replaceAll('&amp;', '&') ?? '';
+    }
     return htmlText.replaceAll('```', '').replaceAll('`', '').trim();
   }
 
@@ -100,3 +108,5 @@ class CodeSnippet extends StatelessWidget {
     );
   }
 }
+
+
