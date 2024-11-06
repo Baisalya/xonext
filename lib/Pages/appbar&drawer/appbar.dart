@@ -144,6 +144,8 @@ class CustomDrawer extends StatelessWidget {
                                 child: Card(
                                   elevation: 9.0,
                                   color: AppTheme.cardBackgroundColor(context),
+                                  surfaceTintColor:AppTheme.UserChatcardBgColor2(context) ,
+
                                   shadowColor: Colors.grey.shade700,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(screenWidth * 0.04),

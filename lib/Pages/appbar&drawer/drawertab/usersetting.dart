@@ -122,6 +122,46 @@ class Usersetting extends StatelessWidget {
                 Get.toNamed('/login');
               },
               style: ElevatedButton.styleFrom(
+                padding: EdgeInsets.zero,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+                elevation: 4.0,
+              ),
+              child: Ink(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [Colors.redAccent, Colors.deepOrangeAccent],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+                child: Container(
+                  width: screenWidth * 0.3, // Fixed width for compact look
+                  alignment: Alignment.center,
+                  padding: EdgeInsets.symmetric(
+                    vertical: screenHeight * 0.012,
+                  ),
+                  child: Text(
+                    'Logout',
+                    style: TextStyle(
+                      fontSize: screenWidth * 0.035,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                      letterSpacing: 0.8,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+
+/*
+            ElevatedButton(
+              onPressed: () {
+                Get.toNamed('/login');
+              },
+              style: ElevatedButton.styleFrom(
                 primary: Colors.red,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8.0),
@@ -133,10 +173,11 @@ class Usersetting extends StatelessWidget {
                 ),
                 child: Text(
                   'Logout',
-                  style: TextStyle(fontSize: screenWidth * 0.03),
+                  style: TextStyle(fontSize: screenWidth * 0.03,color:Colors.white),
                 ),
               ),
             ),
+*/
           ],
         ),
       ),

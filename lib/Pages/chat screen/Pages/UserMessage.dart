@@ -15,64 +15,68 @@ class UserMessage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10.0),
+
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Card(
-            color: AppTheme.cardBackgroundColor2(context),
-            shadowColor: AppTheme.shadowcolor(context), // Set the shadow color
-            elevation: 10,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(15.0),
-                topRight: Radius.zero,
-                bottomLeft: Radius.circular(15.0),
-                bottomRight: Radius.circular(15.0), // Rectangular corner
+          Container(
+            child: Card(
+              color: AppTheme.UserChatcardBgColor2(context),
+              surfaceTintColor:AppTheme.UserChatcardBgColor2(context) ,
+              shadowColor: AppTheme.shadowcolor(context), // Set the shadow color
+              elevation: 10,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(15.0),
+                  topRight: Radius.zero,
+                  bottomLeft: Radius.circular(15.0),
+                  bottomRight: Radius.circular(15.0), // Rectangular corner
+                ),
               ),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(top: 8.0), // Add top margin here
-                  child: Row(
-                    children: [
-                      SizedBox(width: 50,),
-                      IconButton(
-                        icon: Icon(CupertinoIcons.arrow_2_circlepath_circle,color: AppTheme.iconcolor(context),), // Replace with your first icon
-                        onPressed: () {
-                          // Add functionality for the first icon button
-                        },
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.delete_outlined,color: AppTheme.iconcolor(context),), // Replace with your second icon
-                        onPressed: () {
-                          // Add functionality for the second icon button
-                        },
-                      ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(top: 8.0), // Add top margin here
+                    child: Row(
+                      children: [
+                        SizedBox(width: 50,),
+                        IconButton(
+                          icon: Icon(CupertinoIcons.arrow_2_circlepath_circle,color: AppTheme.iconcolor(context),), // Replace with your first icon
+                          onPressed: () {
+                            // Add functionality for the first icon button
+                          },
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.delete_outlined,color: AppTheme.iconcolor(context),), // Replace with your second icon
+                          onPressed: () {
+                            // Add functionality for the second icon button
+                          },
+                        ),
 
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                Container(
-                  constraints: BoxConstraints(
-                    maxWidth: MediaQuery.of(context).size.width * 0.8,
-                  ),
-                  padding: EdgeInsets.fromLTRB(11, 4, 16, 16),
-                  decoration: BoxDecoration(
-                    color: Colors.transparent,
-                  ),
-                  child: CustomText (
+                  Container(
+                    constraints: BoxConstraints(
+                      maxWidth: MediaQuery.of(context).size.width * 0.8,
+                    ),
+                    padding: EdgeInsets.fromLTRB(11, 4, 16, 16),
+                    decoration: BoxDecoration(
+                      color: Colors.transparent,
+                    ),
+                    child: CustomText (
 
-                    style: TextStyle(fontSize: Provider.of<FontSizeNotifier>(context).fontSize),
-                    text: text,
-                    onOpenUrl: (String url) {
-                      launch(url); // Open URL when tapped
-                    },
+                      style: TextStyle(fontSize: Provider.of<FontSizeNotifier>(context).fontSize),
+                      text: text,
+                      onOpenUrl: (String url) {
+                        launch(url); // Open URL when tapped
+                      },
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
           SizedBox(width: 8.0,),
